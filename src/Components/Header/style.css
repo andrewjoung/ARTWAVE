@@ -1,0 +1,29 @@
+#userInformation {
+    height: 200px;
+    background-color:#373737;
+}
+
+#myTab {
+    background-color:#373737;
+    padding-left: 2vw;
+}
+
+#userPicture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color:white;
+}
+
+#cinema-tab, #profile-tab, #contact-tab {
+    color: #e54242;
+}
+
+body, .nav-tabs .nav-link.active {
+    background-color: #222222;
+    border: none;
+}
+
+.nav-tabs {
+    border: none;
+}

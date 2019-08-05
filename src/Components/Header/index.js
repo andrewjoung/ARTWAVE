@@ -10,13 +10,16 @@ class Header extends Component {
 
     componentDidMount() {
         this.setState({page: "cinema"});
+        //console.log("initial state = " + this.state.page);
     }
 
     handleClick = event => {
-        console.log(event.target.name);
+        //console.log(event.target.name);
         this.setState({
             page: event.target.name
         });
+
+        //console.log("clicked nav state is now = " + this.state.page);
     }
 
 

@@ -15,8 +15,12 @@
     background-color:white;
 }
 
-#cinema-tab, #profile-tab, #contact-tab {
+#cinema-tab.active, #profile-tab.active, #contact-tab.active {
     color: #e54242;
+}
+
+#cinema-tab, #profile-tab, #contact-tab {
+    color: #6e1818;
 }
 
 body, .nav-tabs .nav-link.active {

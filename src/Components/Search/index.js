@@ -122,56 +122,65 @@ class Form extends Component {
     //api call to spotify, needs to be launched server side to work
     else if (this.state.media === 'music') {
 
+      axios.post('http://localhost:8080/album/',{title:this.state.title}).then(data=>{
+      console.log(data.data)
+      this.setState({array:data.data})
+      
+      }).catch(err=>{
+        console.log(err)
+      })
+      
+
       //search for spotify songs based on input
-      spotify.search({ type: 'track', query: 'Hips dont lie' }, function (err, data) {
-        let array4 = []
-        if (err) {
-          return console.log('Error occurred: ' + err);
-        }
-        // console.log(data.tracks.items[0].album.name)
-        for (var i = 0; i < data.tracks.items.length; i++) {
-          let bigO = {};
-          let image = (data.tracks.items[i].album.images[0].url);
-          let name = data.tracks.items[i].name;
-          bigO.name = name;
-          bigO.image = image;
-          bigO.artist = data.tracks.items[i].album.artists[0].name
-          bigO.id = i
-          array4.push(bigO)
+      // spotify.search({ type: 'track', query: 'Hips dont lie' }, function (err, data) {
+      //   let array4 = []
+      //   if (err) {
+      //     return console.log('Error occurred: ' + err);
+      //   }
+      //   // console.log(data.tracks.items[0].album.name)
+      //   for (var i = 0; i < data.tracks.items.length; i++) {
+      //     let bigO = {};
+      //     let image = (data.tracks.items[i].album.images[0].url);
+      //     let name = data.tracks.items[i].name;
+      //     bigO.name = name;
+      //     bigO.image = image;
+      //     bigO.artist = data.tracks.items[i].album.artists[0].name
+      //     bigO.id = i
+      //     array4.push(bigO)
 
 
-        }
-        console.log(array4)
+      //   }
+      //   console.log(array4)
 
-      });
+      // });
 
-      //search for spotify albums via input
-      spotify.search({ type: 'album', query: 'darkside of the moon' }, function (err, data) {
-        let array4 = []
-        if (err) {
-          return console.log('Error occurred: ' + err);
-        }
-
-
-        for (var i = 0; i < data.albums.items.length; i++) {
-          let bigO = {};
-          let name = data.albums.items[i].name
-          let artist = (data.albums.items[i].artists[0].name);
-          let image = (data.albums.items[i].images[0].url);
-
-          bigO.artist = artist;
-          bigO.image = image;
-          bigO.name = name
-          array4.push(bigO)
-
-        }
-        console.log(array4)
-        // console.log(data.albums.items[0])
+      // //search for spotify albums via input
+      // spotify.search({ type: 'album', query: 'darkside of the moon' }, function (err, data) {
+      //   let array4 = []
+      //   if (err) {
+      //     return console.log('Error occurred: ' + err);
+      //   }
 
 
+      //   for (var i = 0; i < data.albums.items.length; i++) {
+      //     let bigO = {};
+      //     let name = data.albums.items[i].name
+      //     let artist = (data.albums.items[i].artists[0].name);
+      //     let image = (data.albums.items[i].images[0].url);
+
+      //     bigO.artist = artist;
+      //     bigO.image = image;
+      //     bigO.name = name
+      //     array4.push(bigO)
+
+      //   }
+      //   console.log(array4)
+      //   // console.log(data.albums.items[0])
 
 
-      });
+
+
+      // });
     };
 
   };

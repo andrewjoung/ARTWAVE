@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./style.css";
 import ListCard from '../ListCard';
-
+import { Link } from "react-router-dom";
 
 const TESTING_LIST1 = {
     title: "Oscar Movies",
@@ -200,6 +200,10 @@ function MainBody(props) {
             <h3 className="pinnedText">Pinned Lists</h3>
             <div className="row">
                 {card}
+                <div className="listActions">
+                    <Link to="/list" className="action">See All</Link>
+                    <Link to="/create-list" className="action">Create List</Link>
+                </div>
             </div>
         </div>
     );  

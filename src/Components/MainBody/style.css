@@ -10,3 +10,16 @@
     margin-bottom: 20px;
     color: #e54242;
 }
+.action {
+    display:block;
+}
+.row {
+    position: relative;
+}
+
+.listActions {
+    position: absolute;
+    right: 1%;
+    bottom: 0;
+    text-align:right;
+}

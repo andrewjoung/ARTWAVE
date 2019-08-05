@@ -19,7 +19,7 @@ var spotify = new Spotify({
 
 
 //let axios = require('axios');
-let apiKey = '91413d43'
+
 
 
 class Form extends Component {
@@ -28,7 +28,7 @@ class Form extends Component {
     title: "",
     media: "",
     array: [],
-    musicType:''
+    musicType: ''
   };
 
   //Onclick funtion that is attatched to each image, used to splice from array so no longer displayed and used to pass clicked data into database to persist to lists
@@ -66,122 +66,45 @@ class Form extends Component {
     e.preventDefault()
     //apio call to movies using input change states
     if (this.state.media === 'movies') {
+      axios.post('http://localhost:8080/movies',{title:this.state.title}).then(data=>{
+        this.setState({array:data.data})
+      })
 
 
-      let omdb = `http://www.omdbapi.com/?s=${this.state.title}&y=&plot=short&apikey=${apiKey}`
-      let array2 = []
-      if (this.state.media === 'movies') {
-        axios.get(omdb).then(res => {
+     
 
-          for (var i = 0; i < res.data.Search.length; i++) {
-            if (res.data.Search[i].Poster !== 'N/A') {
+    }
 
-              let emptyO = { name: '', image: '', id: i }
-              emptyO.name = res.data.Search[i].Title;
-              emptyO.image = res.data.Search[i].Poster;
+    //api call to google books via input selection.
+    else if (this.state.media === 'books') {
+      axios.post('http://localhost:8080/books',{title:this.state.title}).then(data=>{
+        this.setState({array:data.data})
+      }).catch(err=>{
+        console.log(err)
+      })
+      //this.setState({ array: array2 })
+    }
+    //api call to spotify, needs to be launched server side to work
+    else if (this.state.media === 'music') {
 
-              array2.push(emptyO)
-
-            }
-          }
-
-
-          this.setState({ array: array2 })
+      if (this.state.musicType === 'song') {
 
 
+        axios.post('http://localhost:8080/album/', { title: this.state.title }).then(data => {
+          console.log(data.data)
+          this.setState({ array: data.data })
 
         }).catch(err => {
           console.log(err)
         })
       }
-    }
-
-    //api call to google books via input selection.
-    else if (this.state.media === 'books') {
-      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${this.state.title}`).then(response => {
-        let array2 = []
-
-        this.setState({ array: response.data.items })
-        console.log(response.data.items[5].volumeInfo)
-
-        for (var i = 0; i < response.data.items.length; i++) {
-          if (response.data.items[i].volumeInfo.imageLinks) {
-
-            let emptyO = { name: '', image: '', id: i }
-            emptyO.name = response.data.items[i].volumeInfo.title
-            emptyO.image = response.data.items[i].volumeInfo.imageLinks.thumbnail
-
-            array2.push(emptyO)
-            console.log(array2)
-          }
-        }
-
-        this.setState({ array: array2 })
-        console.log(array2)
-      })
-    }
-    //api call to spotify, needs to be launched server side to work
-    else if (this.state.media === 'music') {
-
-      axios.post('http://localhost:8080/album/', { title: this.state.title }).then(data => {
-        console.log(data.data)
-        this.setState({ array: data.data })
-
-      }).catch(err => {
-        console.log(err)
-      })
+      else{
+        axios.post('http://localhost:8080/song/', { title: this.state.title }).then(data=>{
+          this.setState({array:data.data})
+        })
+      }
 
 
-      //search for spotify songs based on input
-      // spotify.search({ type: 'track', query: 'Hips dont lie' }, function (err, data) {
-      //   let array4 = []
-      //   if (err) {
-      //     return console.log('Error occurred: ' + err);
-      //   }
-      //   // console.log(data.tracks.items[0].album.name)
-      //   for (var i = 0; i < data.tracks.items.length; i++) {
-      //     let bigO = {};
-      //     let image = (data.tracks.items[i].album.images[0].url);
-      //     let name = data.tracks.items[i].name;
-      //     bigO.name = name;
-      //     bigO.image = image;
-      //     bigO.artist = data.tracks.items[i].album.artists[0].name
-      //     bigO.id = i
-      //     array4.push(bigO)
-
-
-      //   }
-      //   console.log(array4)
-
-      // });
-
-      // //search for spotify albums via input
-      // spotify.search({ type: 'album', query: 'darkside of the moon' }, function (err, data) {
-      //   let array4 = []
-      //   if (err) {
-      //     return console.log('Error occurred: ' + err);
-      //   }
-
-
-      //   for (var i = 0; i < data.albums.items.length; i++) {
-      //     let bigO = {};
-      //     let name = data.albums.items[i].name
-      //     let artist = (data.albums.items[i].artists[0].name);
-      //     let image = (data.albums.items[i].images[0].url);
-
-      //     bigO.artist = artist;
-      //     bigO.image = image;
-      //     bigO.name = name
-      //     array4.push(bigO)
-
-      //   }
-      //   console.log(array4)
-      //   // console.log(data.albums.items[0])
-
-
-
-
-      // });
     };
 
   };
@@ -205,7 +128,7 @@ class Form extends Component {
 
 
               </select>
-              <select name="musicType" value={this.state.musicType} onChange={this.handleInputChange} id="make-select" className = 'browser-default'>
+              <select name="musicType" value={this.state.musicType} onChange={this.handleInputChange} id="make-select" className='browser-default'>
                 <option >Select Song or Album</option>
                 <option value="song" >Song</option>
                 <option value="album">Album</option>

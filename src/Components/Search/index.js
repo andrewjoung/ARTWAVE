@@ -27,7 +27,8 @@ class Form extends Component {
   state = {
     title: "",
     media: "",
-    array: []
+    array: [],
+    musicType:''
   };
 
   //Onclick funtion that is attatched to each image, used to splice from array so no longer displayed and used to pass clicked data into database to persist to lists
@@ -122,14 +123,14 @@ class Form extends Component {
     //api call to spotify, needs to be launched server side to work
     else if (this.state.media === 'music') {
 
-      axios.post('http://localhost:8080/album/',{title:this.state.title}).then(data=>{
-      console.log(data.data)
-      this.setState({array:data.data})
-      
-      }).catch(err=>{
+      axios.post('http://localhost:8080/album/', { title: this.state.title }).then(data => {
+        console.log(data.data)
+        this.setState({ array: data.data })
+
+      }).catch(err => {
         console.log(err)
       })
-      
+
 
       //search for spotify songs based on input
       // spotify.search({ type: 'track', query: 'Hips dont lie' }, function (err, data) {
@@ -204,7 +205,11 @@ class Form extends Component {
 
 
               </select>
-              <Music />
+              <select name="musicType" value={this.state.musicType} onChange={this.handleInputChange} id="make-select" className = 'browser-default'>
+                <option >Select Song or Album</option>
+                <option value="song" >Song</option>
+                <option value="album">Album</option>
+              </select>
 
             </div>
             <input

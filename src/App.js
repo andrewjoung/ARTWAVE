@@ -1,4 +1,6 @@
 import React from 'react';
+import './App.css';
+import Header from "./Components/Header";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
@@ -9,6 +11,7 @@ function App() {
       <div>
         <Route exact path="/" component={Login}/>
         <Route exact path="/register" component={Register}/>
+        <Route exact path="/main" component={Header} />
       </div>
     </Router>
   );

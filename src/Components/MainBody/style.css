@@ -1,0 +1,12 @@
+#mainBody {
+    color: white;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 2vh;
+}
+
+.pinnedText {
+    text-align:left;
+    margin-bottom: 20px;
+    color: #e54242;
+}

@@ -4,10 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
-<<<<<<< HEAD
     "node-spotify-api": "^1.1.1",
-=======
->>>>>>> 5aadb10964921385828eca5f9b405eccdc8259dc
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",

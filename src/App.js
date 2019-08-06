@@ -1,5 +1,14 @@
 import React from 'react';
 import './App.css';
+<<<<<<< HEAD
+import Search from './Components/Search'
+
+function App() {
+  return (
+    <div className="App">
+      <Search/>
+    </div>
+=======
 import Header from "./Components/Header";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Login from "./Components/Login";
@@ -14,6 +23,7 @@ function App() {
         <Route exact path="/main" component={Header} />
       </div>
     </Router>
+>>>>>>> 5aadb10964921385828eca5f9b405eccdc8259dc
   );
 }
 

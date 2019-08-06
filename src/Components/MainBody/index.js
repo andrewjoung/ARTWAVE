@@ -48,7 +48,7 @@ const TESTING_LIST2 = {
         website: "http://marvel.com/avengers_movie"
     }],
     category:"cinema",
-    pinned: false
+    pinned: true
 };
 
 const TESTING_LIST3 = {

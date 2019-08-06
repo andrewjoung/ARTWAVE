@@ -51,7 +51,7 @@ class Register extends Component {
                         <input value={this.state.passwordConfirm} className="form-control" name="passwordConfirm" type="password" placeholder="Confirm Password"onChange={this.handleInputChange}/>
                     </div>
                     {/* <Link to="/"> */}
-                        <button type="submit" className="btn btn-sm" id="createAcct" onClick={this.handleFormSubmit}>Create Account</button>
+                    <button type="submit" className="btn btn-sm" id="createAcct" onClick={this.handleFormSubmit}>Create Account</button>
                     {/* </Link> */}
                 </form>
             </div>

@@ -31,12 +31,35 @@ class Form extends Component {
     for (var i = 0; i < this.state.array.length; i++) {
       array3.push(this.state.array[i])
     }
-    console.log(array3.indexOf(id))
+
+    console.log(array3.index)
+
     array3.filter(object => {
       if (object.id === id)
-        array3.splice(array3.indexOf(object), 1)
+        if (this.state.media === "movies") {
+          axios.post(`http://localhost:8080/movies/${object.searchId}`).then(data => {
+            console.log(data.data);
+
+          })
+          array3.splice(array3.indexOf(object), 1)
+        }
+        else if(this.state.media === 'books'){
+          console.log(object)
+          axios.post(`http://localhost:8080/books/${object.Search}`).then(data=>{
+            
+          })
+          array3.splice(array3.indexOf(object), 1)
+        }
+        else{
+          array3.splice(array3.indexOf(object), 1)
+        }
+
+
+
     })
     this.setState({ array: array3 })
+
+
   }
 
   //event handler to change state to whatever has been typed into input box
@@ -64,7 +87,7 @@ class Form extends Component {
       })
 
 
-     
+
 
     }
 
@@ -80,7 +103,7 @@ class Form extends Component {
     //api call to spotify, needs to be launched server side to work
     else if (this.state.media === 'music') {
 
-      if (this.state.musicType === 'song') {
+      if (this.state.musicType === 'album') {
 
 
         axios.post('http://localhost:8080/album/', { title: this.state.title }).then(data => {
@@ -91,9 +114,9 @@ class Form extends Component {
           console.log(err)
         })
       }
-      else{
-        axios.post('http://localhost:8080/song/', { title: this.state.title }).then(data=>{
-          this.setState({array:data.data})
+      else {
+        axios.post('http://localhost:8080/song/', { title: this.state.title }).then(data => {
+          this.setState({ array: data.data })
         })
       }
 

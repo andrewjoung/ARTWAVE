@@ -30,9 +30,9 @@ class Register extends Component {
             password: this.state.password
         };
         // console.log(newUser);
-        API.registerUser(newUser).then(function(data) {
-            console.log("inside api promise!");
-            console.log(data.data);
+        API.registerUser(newUser).then(function(res) {
+            // console.log("inside api promise!");
+            console.log(res.data);
         });
     }    
     
@@ -48,7 +48,7 @@ class Register extends Component {
                         <input value={this.state.username} className="form-control" name="username" type="text" placeholder="Username"onChange={this.handleInputChange}/>
                         <input value={this.state.email} className="form-control" name="email" type="email" placeholder="Email"onChange={this.handleInputChange}/>
                         <input value={this.state.password} className="form-control" name="password" type="password" placeholder="Password"onChange={this.handleInputChange}/>
-                        <input value={this.state.passwordConfirm} className="form-control" name="passwordConfirm" type="passwordConfirm" placeholder="Confirm Password"onChange={this.handleInputChange}/>
+                        <input value={this.state.passwordConfirm} className="form-control" name="passwordConfirm" type="password" placeholder="Confirm Password"onChange={this.handleInputChange}/>
                     </div>
                     {/* <Link to="/"> */}
                     <button type="submit" className="btn btn-sm" id="createAcct" onClick={this.handleFormSubmit}>Create Account</button>

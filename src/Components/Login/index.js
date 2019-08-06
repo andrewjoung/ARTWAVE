@@ -7,8 +7,6 @@ class Login extends Component {
         username: "",
         password: ""
     };
-
-    
     
     render() {
         return (

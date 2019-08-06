@@ -7,6 +7,6 @@ export default {
         return axios.post("http://localhost:8080/register", newUser);
     },
     loginUser: (loginInfo) => {
-        return axios.get("http://localhost:8080/user/login", loginInfo);
+        return axios.post("http://localhost:8080/user/login", loginInfo);
     }
 };

@@ -30,9 +30,9 @@ class Register extends Component {
             password: this.state.password
         };
         // console.log(newUser);
-        API.registerUser(newUser).then(function(data) {
-            console.log("inside api promise!");
-            console.log(data.data);
+        API.registerUser(newUser).then(function(res) {
+            // console.log("inside api promise!");
+            console.log(res.data);
         });
     }    
     

@@ -5,12 +5,14 @@ import MainBody from "../MainBody";
 class Header extends Component {
 
     state = {
-        page:""
+        page:"",
+        loginInfo:{}
     }
 
-    componentDidMount() {
-        this.setState({page: "cinema"});
+    componentDidMount = () => {
+        this.setState({page: "cinema", loginInfo: this.props.loginInfo});
         //console.log("initial state = " + this.state.page);
+        console.log(this.state.loginInfo)
     }
 
     handleClick = event => {
@@ -66,7 +68,7 @@ class Header extends Component {
                     etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog
                     stumptown. Pitchfork sustainable tofu synth chambray yr.</div> */}
 
-                    <MainBody page={this.state.page}/>
+                    <MainBody page={this.state.page} loginInfo={this.state.loginInfo}/>
                 </div>
             </div>
         );

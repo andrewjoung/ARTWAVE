@@ -54,7 +54,7 @@ class Login extends Component {
             );
         } else {
             return (
-                <Header />
+                <Header loginInfo={this.state.loginInfo} />
             );
         }
     }

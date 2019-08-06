@@ -8,5 +8,8 @@ export default {
     },
     loginUser: (loginInfo) => {
         return axios.post("http://localhost:8080/user/login", loginInfo);
+    },
+    createList: (listData) => {
+        return axios.post("http://localhost:8080/create-list/", listData);
     }
 };

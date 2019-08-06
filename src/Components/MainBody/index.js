@@ -194,6 +194,9 @@ function MainBody(props) {
         return <ListCard listItem = {list} />
     });
 
+    console.log("al;ksdjfl;aj");
+    console.log(props.loginInfo);
+
     return(
         <div id="mainBody">
             {/* returning main body and category is {props.page} */}
@@ -202,7 +205,8 @@ function MainBody(props) {
                 {card}
                 <div className="listActions">
                     <Link to="/list" className="action">See All</Link>
-                    <Link to="/create-list" className="action">Create List</Link>
+                    <Link to={{ pathname: "/create-list", state: {loginInfo: props.loginInfo, category: props.page}}} className="action">Create List</Link>
+                    {/* <Link to="/create-list" loginInfo = {props.loginInfo} className="action">Create List</Link> */}
                 </div>
             </div>
         </div>

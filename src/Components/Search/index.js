@@ -10,27 +10,20 @@ var spotify = new Spotify({
   secret: '7c527687d94c49f1a283872df71f004e'
 });
 
-
-
-
-
-
-
-
-
-//let axios = require('axios');
-
-
-
 class Form extends Component {
   // Setting the component's initial state
   state = {
     title: "",
     media: "",
     array: [],
-    musicType: ''
+    musicType: '',
+    listToUse:{}
   };
 
+  componentDidMount = () => {
+    console.log(this.props.list);
+    this.setState({listToUse: this.props.list, media: this.props.list.category});
+  }
   //Onclick funtion that is attatched to each image, used to splice from array so no longer displayed and used to pass clicked data into database to persist to lists
   click = (id) => {
     console.log(id)
@@ -65,7 +58,7 @@ class Form extends Component {
   handleFormSubmit = e => {
     e.preventDefault()
     //apio call to movies using input change states
-    if (this.state.media === 'movies') {
+    if (this.state.media === 'cinema') {
       axios.post('http://localhost:8080/movies',{title:this.state.title}).then(data=>{
         this.setState({array:data.data})
       })
@@ -76,7 +69,7 @@ class Form extends Component {
     }
 
     //api call to google books via input selection.
-    else if (this.state.media === 'books') {
+    else if (this.state.media === 'literature') {
       axios.post('http://localhost:8080/books',{title:this.state.title}).then(data=>{
         this.setState({array:data.data})
       }).catch(err=>{
@@ -119,7 +112,7 @@ class Form extends Component {
             Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
           </p>
           <form className="form">
-            <div id="second-input-hidden" className="col-md-12 mt-4">
+            {/* <div id="second-input-hidden" className="col-md-12 mt-4">
               <select name="media" value={this.state.media} onChange={this.handleInputChange} id="make-select" className="browser-default custom-select">
                 <option >Select the type of media you want to search</option>
                 <option value="movies" >Movies</option>
@@ -134,7 +127,7 @@ class Form extends Component {
                 <option value="album">Album</option>
               </select>
 
-            </div>
+            </div> */}
             <input
               value={this.state.title}
               name="title"
@@ -159,7 +152,7 @@ class Form extends Component {
             Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
           </p>
           <form className="form">
-            <div id="second-input-hidden" className="col-md-12 mt-4">
+            {/* <div id="second-input-hidden" className="col-md-12 mt-4">
               <select name="media" value={this.state.media} onChange={this.handleInputChange} id="make-select" className="browser-default custom-select">
                 <option >Select the type of media you want to search</option>
                 <option value="movies" >Movies</option>
@@ -169,7 +162,7 @@ class Form extends Component {
 
               </select>
 
-            </div>
+            </div> */}
             <input
               value={this.state.title}
               name="title"

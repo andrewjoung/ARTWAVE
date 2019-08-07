@@ -34,28 +34,55 @@ class Form extends Component {
       array3.push(this.state.array[i])
     }
 
-    console.log(array3.index)
-
     array3.filter(object => {
-      if (object.id === id)
+      if (object.id === id) {
+
+        //axios post and return of data call for the specific clicked movie, is added to database on backend
+
         if (this.state.media === "movies") {
           axios.post(`http://localhost:8080/movies/${object.searchId}`).then(data => {
             console.log(data.data);
 
+          }).catch(err => {
+            console.log(err)
           })
-          array3.splice(array3.indexOf(object), 1)
-        }
-        else if(this.state.media === 'books'){
-          console.log(object)
-          axios.post(`http://localhost:8080/books/${object.Search}`).then(data=>{
-            
-          })
-          array3.splice(array3.indexOf(object), 1)
-        }
-        else{
           array3.splice(array3.indexOf(object), 1)
         }
 
+        //axios post and return of data call for the specific clicked book, is added to database on backend
+        else if (this.state.media === 'books') {
+          console.log(object)
+          axios.post(`http://localhost:8080/books/${object.Search}`).then(data => {
+
+          }).catch(err => {
+            console.log(err)
+          })
+          array3.splice(array3.indexOf(object), 1)
+        }
+
+        //axios post and return of data call for the specific clicked music, is added to database on backend. Has an if/else statement within since song and album are two seperate API searches, and will require different routes and be pushed to different models.
+        else if (this.state.media === "music") {
+          if (this.state.musicType === 'song') {
+            id = object.search
+            axios.post(`http://localhost:8080/song/${object.search}/${object.name}`).then(data => {
+
+            }).catch(err => {
+              console.log(err)
+            })
+          }
+          //statement for album search, sends id and album name (basically does exact same search again, but this time uses a string comaprison to filter through the 20 list items that are being returned on back end)
+          else if(this.state.musicType === 'album'){
+            id=object.search;
+            axios.post(`http://localhost:8080/album/${object.search}/${object.name}`).then(data=>{
+
+            }).catch(err=>{
+              console.log(err)
+            })
+          }
+          array3.splice(array3.indexOf(object), 1)
+        }
+
+      }
 
 
     })

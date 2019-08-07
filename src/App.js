@@ -11,7 +11,8 @@ function App() {
   return (
     <Router>
       <div>
-        <Route exact path="/" component={Login}/>
+        <Route exact path="/" compoent={Login}/>
+        <Route exact path="/login" component={Login}/>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/main" component={Header} />
         <Route exact path="/search" component={Search}/>

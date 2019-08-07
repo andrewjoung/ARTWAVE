@@ -13,11 +13,6 @@ var spotify = new Spotify({
 
 
 
-
-
-
-
-
 //let axios = require('axios');
 
 
@@ -38,12 +33,62 @@ class Form extends Component {
     for (var i = 0; i < this.state.array.length; i++) {
       array3.push(this.state.array[i])
     }
-    console.log(array3.indexOf(id))
+
     array3.filter(object => {
-      if (object.id === id)
-        array3.splice(array3.indexOf(object), 1)
+      if (object.id === id) {
+
+        //axios post and return of data call for the specific clicked movie, is added to database on backend
+
+        if (this.state.media === "movies") {
+          axios.post(`http://localhost:8080/movies/${object.searchId}`).then(data => {
+            console.log(data.data);
+
+          }).catch(err => {
+            console.log(err)
+          })
+          array3.splice(array3.indexOf(object), 1)
+        }
+
+        //axios post and return of data call for the specific clicked book, is added to database on backend
+        else if (this.state.media === 'books') {
+          console.log(object)
+          axios.post(`http://localhost:8080/books/${object.Search}`).then(data => {
+
+          }).catch(err => {
+            console.log(err)
+          })
+          array3.splice(array3.indexOf(object), 1)
+        }
+
+        //axios post and return of data call for the specific clicked music, is added to database on backend. Has an if/else statement within since song and album are two seperate API searches, and will require different routes and be pushed to different models.
+        else if (this.state.media === "music") {
+          if (this.state.musicType === 'song') {
+            id = object.search
+            axios.post(`http://localhost:8080/song/${object.search}/${object.name}`).then(data => {
+
+            }).catch(err => {
+              console.log(err)
+            })
+          }
+          //statement for album search, sends id and album name (basically does exact same search again, but this time uses a string comaprison to filter through the 20 list items that are being returned on back end)
+          else if(this.state.musicType === 'album'){
+            id=object.search;
+            axios.post(`http://localhost:8080/album/${object.search}/${object.name}`).then(data=>{
+
+            }).catch(err=>{
+              console.log(err)
+            })
+          }
+          array3.splice(array3.indexOf(object), 1)
+        }
+
+      }
+
+
     })
     this.setState({ array: array3 })
+
+
   }
 
   //event handler to change state to whatever has been typed into input box
@@ -66,20 +111,21 @@ class Form extends Component {
     e.preventDefault()
     //apio call to movies using input change states
     if (this.state.media === 'movies') {
-      axios.post('http://localhost:8080/movies',{title:this.state.title}).then(data=>{
-        this.setState({array:data.data})
+      axios.post('http://localhost:8080/movies', { title: this.state.title }).then(data => {
+        console.log(data.data)
+        this.setState({ array: data.data })
       })
 
 
-     
+
 
     }
 
     //api call to google books via input selection.
     else if (this.state.media === 'books') {
-      axios.post('http://localhost:8080/books',{title:this.state.title}).then(data=>{
-        this.setState({array:data.data})
-      }).catch(err=>{
+      axios.post('http://localhost:8080/books', { title: this.state.title }).then(data => {
+        this.setState({ array: data.data })
+      }).catch(err => {
         console.log(err)
       })
       //this.setState({ array: array2 })
@@ -87,7 +133,7 @@ class Form extends Component {
     //api call to spotify, needs to be launched server side to work
     else if (this.state.media === 'music') {
 
-      if (this.state.musicType === 'song') {
+      if (this.state.musicType === 'album') {
 
 
         axios.post('http://localhost:8080/album/', { title: this.state.title }).then(data => {
@@ -98,9 +144,9 @@ class Form extends Component {
           console.log(err)
         })
       }
-      else{
-        axios.post('http://localhost:8080/song/', { title: this.state.title }).then(data=>{
-          this.setState({array:data.data})
+      else {
+        axios.post('http://localhost:8080/song/', { title: this.state.title }).then(data => {
+          this.setState({ array: data.data })
         })
       }
 

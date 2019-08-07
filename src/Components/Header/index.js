@@ -1,16 +1,25 @@
 import React, { Component } from "react";
 import "./style.css";
 import MainBody from "../MainBody";
+import ListCard from "../ListCard";
+import api from '../../API/api';
 
 class Header extends Component {
 
     state = {
-        page:""
+        page:"",
+        loginInfo:{},
+        cardComponents:[]
     }
 
-    componentDidMount() {
-        this.setState({page: "cinema"});
+    componentDidMount = () => {
+        this.setState({page:"cinema", loginInfo: this.props.location.state.loginInfo});
         //console.log("initial state = " + this.state.page);
+        //console.log("in the header component", this.state.loginInfo)
+        
+        console.log("component did mount");
+
+        this.apiCall();
     }
 
     handleClick = event => {
@@ -19,12 +28,50 @@ class Header extends Component {
             page: event.target.name
         });
 
-        //console.log("clicked nav state is now = " + this.state.page);
+        this.apiCall();
+
+        console.log("handleClickCheck", this.state);
+
     }
 
+    apiCall = () => {
+        //console.log("clicked nav state is now = " + this.state.page);
+        let listSearchObject = {
+            category: this.state.page,
+            username: this.props.location.state.loginInfo.username
+        }
 
+        api.getLists(listSearchObject).then(res => {
+            //console.log("skippity do", res.data);
+    
+            if(res.data !== null) {
+                console.log("entering");
+                let userListArray = res.data.lists;
+                let filteredArray = userListArray.filter(list => list.category === this.state.page);
+                console.log("filtered array", filteredArray);
+                let listsToShow = filteredArray.filter(list => list.items.length > 0);
+                console.log("listsToShow", listsToShow);
+        
+                //console.log("inside if", listsToShow);
+        
+                let card = listsToShow.map(list => {
+                    console.log(list);
+                    return <ListCard listItem={list} />;
+                });
+    
+                //console.log(card);
+                this.setState({cardComponents: card});
+    
+            } else {
+                console.log("null");
+                this.setState({cardComponents: []});
+            }
+    
+        });
+    }
 
     render() {
+        //console.log("in the header component", this.state.loginInfo);
         return (
 
             <div>
@@ -44,29 +91,9 @@ class Header extends Component {
                     </li>
                 </ul>
                 <div className="tab-content" id="myTabContent">
-                {/* <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Raw denim you
-                    probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master
-                    cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
-                    keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
-                    placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
-                    qui.</div>
-                <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Food truck fixie
-                    locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
-                    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
-                    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
-                    PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
-                    salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
-                    sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-                    stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</div>
-                <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Etsy mixtape
-                    wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack
-                    lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard
-                    locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify
-                    squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie
-                    etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog
-                    stumptown. Pitchfork sustainable tofu synth chambray yr.</div> */}
 
-                    <MainBody page={this.state.page}/>
+                    <MainBody page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents}/>
+                    {/* {this.setComponentTimeout} */}
                 </div>
             </div>
         );

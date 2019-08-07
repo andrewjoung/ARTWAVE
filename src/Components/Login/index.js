@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import "./style.css";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import API from "../../API/api.js";
-import Header from "../Header";
 
 class Login extends Component {
     state = {
@@ -11,6 +10,13 @@ class Login extends Component {
         loggedIn: false,
         loginInfo: {}
     };
+
+    // componentDidMount = () => {
+    //     console.log(this.props.username);
+    //     this.setState({
+    //         username: this.props.username
+    //     });
+    // }
 
     handleInputChange = event => {
         const name = event.target.name;
@@ -31,7 +37,7 @@ class Login extends Component {
                 loginInfo: res.data
             });
         }).catch(function(err) {
-            console.log(err);
+            console.log(err.response);
         });
     };
     
@@ -54,7 +60,7 @@ class Login extends Component {
             );
         } else {
             return (
-                <Header />
+                <Redirect to="/main" loginInfo={this.state.loginInfo}/>
             );
         }
     }

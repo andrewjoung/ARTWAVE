@@ -192,7 +192,7 @@ class Form extends Component {
             <button onClick={this.handleFormSubmit}>Submit</button>
           </form>
           {this.state.array.map(media => (
-            <Results click={this.click} key={media.id} image={media.image} id={media.id} />
+            <Results click={this.click} key={media.id} name={media.name} image={media.image} id={media.id} />
           ))}
 
         </div>

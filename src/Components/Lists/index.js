@@ -25,18 +25,21 @@ class Lists extends React.Component {
       name: "The Avengers",
       image: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
       id: 0,
-      omdbId : 'tt0133093'
+      omdbId : 'tt0133093',
+      type:'cinema'
     }, {
       name: "Avengers: Infinity War",
       image: "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg",
       id: 1,
-      omdbId : 'tt0133093'
+      omdbId : 'tt0133093',
+      type:'cinema'
     },
     {
       name: "Avengers: Age of Ultron",
       image: "https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SX300.jpg",
       id: 2,
-      omdbId : 'tt0133093'
+      omdbId : 'tt0133093',
+      type:'cinema'
     },
     ]
     let array2 = [{ name: 'devins List' },
@@ -44,21 +47,24 @@ class Lists extends React.Component {
       name: 'The Matrix',
       image: "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
       id: 0,
-      omdbId : 'tt0133093'
+      omdbId : 'tt0133093',
+      type:'cinema'
 
     },
     {
       name: "The Matrix Reloaded",
       image: "https://m.media-amazon.com/images/M/MV5BODE0MzZhZTgtYzkwYi00YmI5LThlZWYtOWRmNWE5ODk0NzMxXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
       id: 1,
-      omdbId : 'tt0133093'
+      omdbId : 'tt0133093',
+      type:'cinema'
     },
     {
 
       name: "The Matrix Revolutions",
       image: "https://m.media-amazon.com/images/M/MV5BNzNlZTZjMDctZjYwNi00NzljLWIwN2QtZWZmYmJiYzQ0MTk2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
       id: 2,
-      omdbId : 'tt0133093'
+      omdbId : 'tt0133093',
+      type:'cinema'
     }
     ]
     let mainArray = [array, array2]
@@ -85,9 +91,11 @@ class Lists extends React.Component {
     })
   }
 
-  modal = (e,id) =>{
-    e.preventDefault()
+  modal = (id,type) =>{
     console.log('this is working', id)
+    axios.post('http://localhost:8080/listItem',{id,type}).then(data=>{
+      console.log(data)
+    })
   }
 
 
@@ -114,7 +122,7 @@ class Lists extends React.Component {
         <div>
           <form>
             {this.state.smallArray.map(item => (
-              <ItemDisplay id={item.omdbId} click = {this.modal} image={item.image} name={item.name} />
+              <ItemDisplay id={item.omdbId} type={item.type} modal = {this.modal} image={item.image} name={item.name} />
             ))}
             <textarea name='textVal' value={this.state.textVal} onChange={this.handleChange}></textarea>
             <button onClick = {this.hanldeSubmit} className ="btn btn-success">Submit Comment</button>

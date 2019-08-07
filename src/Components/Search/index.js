@@ -225,6 +225,7 @@ class Form extends Component {
           {this.state.array.map(media => (
             <Results click={this.click} key={media.id} image={media.image} id={media.id} />
           ))}
+          <a href = '/main'> <button className = "btn btn-primary">Send me back baby</button> </a>
 
         </div>
       )

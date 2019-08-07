@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 
 function ListCard(props) {
+    console.log("rendering ListCard");
     return(
         <div className="card col-2">
             {/* <img className="card-img-top" src={props.listItem.items[0].poster} alt="Card image cap"></img> */}

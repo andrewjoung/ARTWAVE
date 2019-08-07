@@ -59,8 +59,12 @@ class Login extends Component {
                 </div>
             );
         } else {
+            console.log("login page passing data", this.state.loginInfo);
             return (
-                <Redirect to="/main" loginInfo={this.state.loginInfo}/>
+                // <Header loginInfo={this.state.loginInfo} />
+                <Redirect to={{ pathname: "/main", state: {loginInfo: this.state.loginInfo}}}>
+                    
+                </Redirect>
             );
         }
     }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import "./style.css";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import API from "../../API/api.js";
 import Header from "../Header";
 
@@ -53,8 +53,12 @@ class Login extends Component {
                 </div>
             );
         } else {
+            console.log("login page passing data", this.state.loginInfo);
             return (
-                <Header loginInfo={this.state.loginInfo} />
+                // <Header loginInfo={this.state.loginInfo} />
+                <Redirect to={{ pathname: "/main", state: {loginInfo: this.state.loginInfo}}}>
+                    
+                </Redirect>
             );
         }
     }

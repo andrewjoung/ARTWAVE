@@ -36,17 +36,17 @@ class Form extends Component {
 
     array3.filter(object => {
       if (object.id === id)
-        if (this.state.media === "movies") {
-          axios.post(`http://localhost:8080/movies/${object.searchId}`).then(data => {
+        if (this.state.media === "cinema") {
+          axios.post(`http://localhost:8080/movies/${object.searchId}`, this.state.listToUse).then(data => {
             console.log(data.data);
 
           })
           array3.splice(array3.indexOf(object), 1)
         }
-        else if(this.state.media === 'books'){
+        else if(this.state.media === 'literature'){
           console.log(object)
-          axios.post(`http://localhost:8080/books/${object.Search}`).then(data=>{
-            
+          axios.post(`http://localhost:8080/books/${object.Search}`, this.state.listToUse).then(data=>{
+            console.log("Client side lit", data.data);
           })
           array3.splice(array3.indexOf(object), 1)
         }
@@ -169,6 +169,7 @@ class Form extends Component {
       );
     }
     else {
+      console.log("Scotts stuff", this.state);
       return (
         <div>
           <p>

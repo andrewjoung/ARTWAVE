@@ -11,5 +11,8 @@ export default {
     },
     createList: (listData) => {
         return axios.post("http://localhost:8080/create-list/", listData);
+    },
+    getLists: (searchObject) => {
+        return axios.get("http://localhost:8080/user/" + searchObject.username);
     }
 };

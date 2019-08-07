@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import "./style.css";
 import ListCard from '../ListCard';
 import { Link } from "react-router-dom";
+import api from '../../API/api';
+import { tsPropertySignature } from '@babel/types';
 
 const TESTING_LIST1 = {
     title: "Oscar Movies",
@@ -101,66 +103,42 @@ const TESTING_LIST4 = {
 
 // class MainBody extends Component {
 
-//     // state = {
-//     //     category:this.props.page,
-//     //     listRetrieved:[]
-//     // }
-
-//     constructor(props) {
-//         super(props);
-//         this.componentDidMount = this.componentDidMount.bind(this);
+//     state = {
+//         category:"",
+//         listRetrieved:[]
 //     }
 
-//     componentDidMount() {
-//         //TODO: 
-//         //do ajax call to database
-//         //retrieve list based on category
-//         //filter user list based on which lists are "pinned"
-//         //filter recommendations based on whih lists are "pinned"
+//     // constructor(props) {
+//     //     super(props);
+//     //     this.componentDidMount = this.componentDidMount.bind(this);
+//     // }
 
-//         //TODO:
-//         //create API route for database
-//         //get lists 
-//         //get recommendations
-
-//         //TODO: 
-//         //Use JSON dummy data => 
-//         // if(this.state.category === cinema) {
-//         //      newArray = resultOfAjaxListRequest.filter(where type = cinema)
-//         //} else if (cateogry === literature) {
-//         //      newARray = resultOfAjaxListRequest.filter(where type = literature)
-//         //} else {
-//         //      newARray= resultOfAjaxListRequest.filter(where type = music)
-//         //}
-
-//         /*
-//             topPinned = newARray.filter(where stared = true);
-        
-//             => some way to only display 4 pinned cards 
-//                 => displaying card with art 
-        
-        
-//         */
-
+//     componentDidMount = () => {
 //         //TODO: 
 //         //repeat process above for recommended
+//         console.log("trying to do shit", this.props);
 //         this.setState({category: this.props.page});
 
-//         if(this.state.page === "cinema") {
-
-//         } else if (this.state.page === "literature") {
-
-//         } else {
-
-//         }
-
-
+//         //console.log("doing stuff", this.props.loginInfo);
+//         // api.getLists(this.props.loginInfo.username).then(res => {
+//         //     console.log(res);
+//         // });
 //     }
 
 //     render() {
+//         console.log("al;sjdflka", this.state);
 //         return(
 //             <div id="mainBody">
-//                 returning main body and category is {this.props.page}
+//                 {/* returning main body and category is {props.page} */}
+//                 <h3 className="pinnedText">Pinned Lists</h3>
+//                 <div className="row">
+//                     {/* {card} */}
+//                     <div className="listActions">
+//                         <Link to="/list" className="action">See All</Link>
+//                         <Link to={{ pathname: "/create-list", state: {loginInfo: this.props.loginInfo, category: this.props.page}}} className="action">Create List</Link>
+//                         {/* <Link to="/create-list" loginInfo = {props.loginInfo} className="action">Create List</Link> */}
+//                     </div>
+//                 </div>
 //             </div>
 //         );
 //     }
@@ -181,28 +159,64 @@ function MainBody(props) {
         console.log("filter " + category);
     }
 
-    let listArray = [TESTING_LIST1, TESTING_LIST2, TESTING_LIST3, TESTING_LIST4];
-    let filteredArray = listArray.filter(list => list.category === category);
+    // let listArray = [TESTING_LIST1, TESTING_LIST2, TESTING_LIST3, TESTING_LIST4];
+    // let filteredArray = listArray.filter(list => list.category === category);
 
-    console.log(filteredArray);
+    // console.log(filteredArray);
 
-    let pinnedArray = filteredArray.filter(list => list.pinned === true);
+    // let pinnedArray = filteredArray.filter(list => list.pinned === true);
 
-    console.log(pinnedArray);
+    // console.log(pinnedArray);
 
-    let card = pinnedArray.map(list => {
-        return <ListCard listItem = {list} />
-    });
+    // let card = pinnedArray.map(list => {
+    //     return <ListCard listItem = {list} />
+    // });
 
-    console.log("al;ksdjfl;aj");
-    console.log(props.loginInfo);
+    // console.log("al;ksdjfl;aj");
+    // console.log(props.loginInfo);
+    // console.log("doing stuff", props.loginInfo);
 
+    let listSearchObject = {
+        category: props.page,
+        username: props.loginInfo.username
+    }
+
+    let card;
+
+
+    // api.getLists(listSearchObject).then(res => {
+    //     console.log("skippity do", res.data);
+
+    //     if(res.data !== null) {
+    //         let userListArray = res.data.lists;
+    //         let filteredArray = userListArray.filter(list => list.category === category);
+    //         let listsToShow = filteredArray.filter(list => list.items.length > 0)
+    
+    //         console.log("inside if", listsToShow);
+    
+    //         card = listsToShow.map(list => {
+    //             console.log(list);
+    //             return <ListCard listItem={list} />;
+    //         });
+
+    //         console.log(card);
+
+    //     } else {
+    //         console.log("data is null");
+    //     }
+
+    // });
+
+
+    console.log("function shit", category);
+    console.log(props);
     return(
+
         <div id="mainBody">
             {/* returning main body and category is {props.page} */}
             <h3 className="pinnedText">Pinned Lists</h3>
             <div className="row">
-                {card}
+                {props.cards}
                 <div className="listActions">
                     <Link to="/list" className="action">See All</Link>
                     <Link to={{ pathname: "/create-list", state: {loginInfo: props.loginInfo, category: props.page}}} className="action">Create List</Link>
@@ -211,6 +225,7 @@ function MainBody(props) {
             </div>
         </div>
     );  
+
 }
 
 export default MainBody;

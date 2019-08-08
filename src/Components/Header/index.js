@@ -5,28 +5,28 @@ import ListCard from "../ListCard";
 import api from '../../API/api';
 import ProfileInfo from "../ProfileInfo";
 // import FindFriends from "../FindFriends";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Axios from "axios";
 import ListDisplay from '../ListDisplay'
 const style = {
-    color:'white'
+    color: 'white'
 }
 
 class Header extends Component {
 
     state = {
-        page:"",
-        loginInfo:{},
-        cardComponents:[],
+        page: "",
+        loginInfo: {},
+        cardComponents: [],
         recievedData: [],
         renderList: false
     }
 
     componentDidMount = () => {
-        this.setState({page:"cinema", loginInfo: this.props.location.state.loginInfo});
+        this.setState({ page: "cinema", loginInfo: JSON.parse(localStorage.getItem('loginInfo')) });
         //console.log("initial state = " + this.state.page);
         //console.log("in the header component", this.state.loginInfo)
-        
+
         console.log("component did mount");
         console.log(JSON.parse(localStorage.getItem("loginInfo")));
 
@@ -45,16 +45,16 @@ class Header extends Component {
 
     }
 
-    cardClick = (id,category) =>{
-        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data=>{
-        // console.log(data.data)
-        this.setState({recievedData:data.data,renderList:true})
+    cardClick = (id, category) => {
+        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+            // console.log(data.data)
+            this.setState({ recievedData: data.data, renderList: true })
         })
     }
 
     apiCall = () => {
         //console.log("clicked nav state is now = " + this.state.page);
-        
+
         console.log("in api call this is state that is passed in", this.state);
 
         let listSearchObject = {
@@ -66,10 +66,10 @@ class Header extends Component {
             // for(var i = 0; i < res.data.lists.length; i++){
             //     console.log(res.data.lists[i]._id)
             // }
-            
-            if(res.data === null) {
+
+            if (res.data === null) {
                 this.apiCall();
-            } else if(res.data !== null) {
+            } else if (res.data !== null) {
                 // console.log(res.data)
                 // console.log("entering");
                 let userListArray = res.data.lists;
@@ -77,40 +77,40 @@ class Header extends Component {
                 console.log("filtered array", filteredArray);
                 let listsToShow = filteredArray.filter(list => list.pinned === true);
                 console.log("listsToShow", listsToShow);
-        
+
                 //console.log("inside if", listsToShow);
-        
+
 
 
                 let cardArray = [];
 
-                if(listsToShow.length <= 3) {
+                if (listsToShow.length <= 3) {
                     let card = listsToShow.map(list => {
                         console.log(list.category);
-                        return <ListCard onClick = {this.cardClick} category={list.category} listId = {list._id} listItem={list} />;
+                        return <ListCard onClick={this.cardClick} category={list.category} listId={list._id} listItem={list} />;
 
                     });
 
-                    this.setState({cardComponents: card});
+                    this.setState({ cardComponents: card });
                 } else {
-                    for(var i = 0; i < 4; i++) {
+                    for (var i = 0; i < 4; i++) {
                         //let randomNum = Math.floor((Math.random() * listsToShow.length));
-                        cardArray.push(<ListCard onClick = {this.cardClick} category={listsToShow[i].category} listId = {listsToShow[i]._id} listItem={listsToShow[i]} />);
+                        cardArray.push(<ListCard onClick={this.cardClick} category={listsToShow[i].category} listId={listsToShow[i]._id} listItem={listsToShow[i]} />);
                     }
-                    this.setState({cardComponents: cardArray});
-    
+                    this.setState({ cardComponents: cardArray });
+
                 }
 
-                
+
                 //card(listsToShow);
 
                 //console.log(card);
-                
+
             } else {
                 // console.log("null");
-                this.setState({cardComponents: []});
+                this.setState({ cardComponents: [] });
             }
-    
+
         });
     }
 
@@ -122,15 +122,33 @@ class Header extends Component {
     ];
 
     render() {
-        if(this.state.renderList===true){
+        if (this.state.renderList === true) {
             let array = this.state.recievedData
             console.log(array)
-            return(
-                array.map(item=>(
-                    <ListDisplay name={item.title} image={item.artUri}  />
-                ))
-                
-            )
+            if (this.state.page === 'cinema')
+                return (
+                    <div className="container">
+                        {array.map(item => (
+                            <ListDisplay synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.director} />
+                        ))}
+                    </div>
+
+                )
+            else if (this.state.page === 'literature') {
+                return (
+                    array.map(item => (
+                        <ListDisplay synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author} />
+                    ))
+                )
+            }
+            else{
+                console.log('checking here')
+                return(
+                    array.map(item=>(
+                        <ListDisplay />
+                    ))
+                )
+            }
         }
         return (
 
@@ -161,7 +179,7 @@ class Header extends Component {
                 </ul>
                 <div className="tab-content" id="myTabContent">
 
-                    <MainBody page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents}/>
+                    <MainBody page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents} />
                     {/* {this.setComponentTimeout} */}
                 </div>
             </div>

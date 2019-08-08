@@ -71,15 +71,24 @@ class Header extends Component {
         
                 //console.log("inside if", listsToShow);
         
-                let card = listsToShow.map(list => {
-                    console.log(list.category);
-                    return <ListCard onClick = {this.cardClick} category={list.category} listId = {list._id} listItem={list} />;
+                // let card = listsToShow.map(list => {
+                //     console.log(list.category);
+                //     return <ListCard onClick = {this.cardClick} category={list.category} listId = {list._id} listItem={list} />;
 
-                });
+                // });
+
+                let cardArray = [];
+
+
+                for(var i = 0; i < 4; i++) {
+                    let randomNum = Math.floor((Math.random() * listsToShow.length));
+                    cardArray.push(<ListCard onClick = {this.cardClick} category={listsToShow[randomNum].category} listId = {listsToShow[randomNum]._id} listItem={listsToShow[randomNum]} />);
+                }
                 
-    
+                //card(listsToShow);
+
                 //console.log(card);
-                this.setState({cardComponents: card});
+                this.setState({cardComponents: cardArray});
     
             } else {
                 // console.log("null");

@@ -73,7 +73,7 @@ class Form extends Component {
           array3.splice(array3.indexOf(object), 1)
         }
 
-    }
+      }
 
 
     })
@@ -83,80 +83,80 @@ class Form extends Component {
 
 
 
-//event handler to change state to whatever has been typed into input box
+  //event handler to change state to whatever has been typed into input box
 
-handleInputChange = event => {
-  // Getting the value and name of the input which triggered the change
-  const { name, value } = event.target;
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    const { name, value } = event.target;
 
-  // console.log(event.target)
+    // console.log(event.target)
 
-  // Updating the input's state
-  this.setState({
-    [name]: value
-  });
-};
+    // Updating the input's state
+    this.setState({
+      [name]: value
+    });
+  };
 
-//main api call function, runs 90% of what is seen on page
+  //main api call function, runs 90% of what is seen on page
 
-handleFormSubmit = e => {
-  e.preventDefault()
-  //apio call to movies using input change states
-  if (this.state.media === 'cinema') {
-    axios.post('http://localhost:8080/movies', { title: this.state.title }).then(data => {
-      this.setState({ array: data.data })
-    })
-
-
-
-
-  }
-
-  //api call to google books via input selection.
-  else if (this.state.media === 'literature') {
-    axios.post('http://localhost:8080/books', { title: this.state.title }).then(data => {
-      this.setState({ array: data.data })
-    }).catch(err => {
-      console.log(err)
-    })
-    //this.setState({ array: array2 })
-  }
-  //api call to spotify, needs to be launched server side to work
-  else if (this.state.media === 'music') {
-
-    if (this.state.musicType === 'album') {
-
-
-      axios.post('http://localhost:8080/album/', { title: this.state.title }).then(data => {
-        console.log(data.data)
+  handleFormSubmit = e => {
+    e.preventDefault()
+    //apio call to movies using input change states
+    if (this.state.media === 'cinema') {
+      axios.post('http://localhost:8080/movies', { title: this.state.title }).then(data => {
         this.setState({ array: data.data })
+      })
 
+
+
+
+    }
+
+    //api call to google books via input selection.
+    else if (this.state.media === 'literature') {
+      axios.post('http://localhost:8080/books', { title: this.state.title }).then(data => {
+        this.setState({ array: data.data })
       }).catch(err => {
         console.log(err)
       })
+      //this.setState({ array: array2 })
     }
-    else {
-      axios.post('http://localhost:8080/song/', { title: this.state.title }).then(data => {
-        this.setState({ array: data.data })
-      })
-    }
+    //api call to spotify, needs to be launched server side to work
+    else if (this.state.media === 'music') {
 
+      if (this.state.musicType === 'album') {
+
+
+        axios.post('http://localhost:8080/album/', { title: this.state.title }).then(data => {
+          console.log(data.data)
+          this.setState({ array: data.data })
+
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+      else {
+        axios.post('http://localhost:8080/song/', { title: this.state.title }).then(data => {
+          this.setState({ array: data.data })
+        })
+      }
+
+
+    };
 
   };
 
-};
+  render() {
+    //different page rendering based on music selection (displays second dropdown for album or track)
+    if (this.state.media === 'music') {
 
-render() {
-  //different page rendering based on music selection (displays second dropdown for album or track)
-  if (this.state.media === 'music') {
-
-    return (
-      <div>
-        <p>
-          Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
-        </p>
-        <form className="form">
-          {/* <div id="second-input-hidden" className="col-md-12 mt-4">
+      return (
+        <div>
+          <p>
+            Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
+          </p>
+          <form className="form">
+            {/* <div id="second-input-hidden" className="col-md-12 mt-4">
               <select name="media" value={this.state.media} onChange={this.handleInputChange} id="make-select" className="browser-default custom-select">
                 <option >Select the type of media you want to search</option>
                 <option value="movies" >Movies</option>
@@ -172,31 +172,36 @@ render() {
               </select>
 
             </div> */}
-          <input
-            value={this.state.title}
-            name="title"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="First Name"
-          />
+            <input
+              value={this.state.title}
+              name="title"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="Testing"
+            />
+            <select name="musicType" value={this.state.musicType} onChange={this.handleInputChange} id="make-select" className='browser-default'>
+              <option >Select Song or Album</option>
+              <option value="song" >Song</option>
+              <option value="album">Album</option>
+            </select>
 
-          <button onClick={this.handleFormSubmit}>Submit</button>
-        </form>
-        {this.state.array.map(media => (
-          <Results click={this.click} key={media.id} image={media.image} id={media.id} />
-        ))}
+            <button onClick={this.handleFormSubmit}>Submit</button>
+          </form>
+          {this.state.array.map(media => (
+            <Results click={this.click} key={media.id} image={media.image} id={media.id} />
+          ))}
 
-      </div>
-    );
-  } else {
-    console.log("Scotts stuff", this.state);
-    return (
-      <div>
-        <p>
-          Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
-        </p>
-        <form className="form">
-          {/* <div id="second-input-hidden" className="col-md-12 mt-4">
+        </div>
+      );
+    } else {
+      console.log("Scotts stuff", this.state);
+      return (
+        <div>
+          <p>
+            Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
+          </p>
+          <form className="form">
+            {/* <div id="second-input-hidden" className="col-md-12 mt-4">
               <select name="media" value={this.state.media} onChange={this.handleInputChange} id="make-select" className="browser-default custom-select">
                 <option >Select the type of media you want to search</option>
                 <option value="movies" >Movies</option>
@@ -207,23 +212,24 @@ render() {
               </select>
 
             </div> */}
-          <input
-            value={this.state.title}
-            name="title"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="First Name"
-          />
+            <input
+              value={this.state.title}
+              name="title"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="Media"
+            />
 
-          <button onClick={this.handleFormSubmit}>Submit</button>
-        </form>
-        {this.state.array.map(media => (
-          <Results click={this.click} key={media.id} image={media.image} id={media.id} />
-        ))}
+            <button onClick={this.handleFormSubmit}>Submit</button>
+          </form>
+          {this.state.array.map(media => (
+            <Results click={this.click} key={media.id} image={media.image} id={media.id} />
+          ))}
+          <a href = '/main'> <button className = "btn btn-primary">Send me back baby</button> </a>
 
-      </div>
-    )
-  }
+        </div>
+      )
+    }
   }
 
 }

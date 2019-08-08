@@ -3,13 +3,19 @@ import "./style.css";
 import MainBody from "../MainBody";
 import ListCard from "../ListCard";
 import api from '../../API/api';
-
+import Axios from "axios";
+import ListDisplay from '../ListDisplay'
+const style = {
+    color:'white'
+}
 class Header extends Component {
 
     state = {
         page:"",
         loginInfo:{},
-        cardComponents:[]
+        cardComponents:[],
+        recievedData: [],
+        renderList: false
     }
 
     componentDidMount = () => {
@@ -34,6 +40,13 @@ class Header extends Component {
 
     }
 
+    cardClick = (id,category) =>{
+        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data=>{
+        // console.log(data.data)
+        this.setState({recievedData:data.data,renderList:true})
+        })
+    }
+
     apiCall = () => {
         //console.log("clicked nav state is now = " + this.state.page);
         let listSearchObject = {
@@ -42,10 +55,14 @@ class Header extends Component {
         }
 
         api.getLists(listSearchObject).then(res => {
-            //console.log("skippity do", res.data);
+            // for(var i = 0; i < res.data.lists.length; i++){
+            //     console.log(res.data.lists[i]._id)
+            // }
+            
     
             if(res.data !== null) {
-                console.log("entering");
+                // console.log(res.data)
+                // console.log("entering");
                 let userListArray = res.data.lists;
                 let filteredArray = userListArray.filter(list => list.category === this.state.page);
                 console.log("filtered array", filteredArray);
@@ -55,15 +72,17 @@ class Header extends Component {
                 //console.log("inside if", listsToShow);
         
                 let card = listsToShow.map(list => {
-                    console.log(list);
-                    return <ListCard listItem={list} />;
+                    console.log(list.category);
+                    return <ListCard onClick = {this.cardClick} category={list.category} listId = {list._id} listItem={list} />;
+
                 });
+                
     
                 //console.log(card);
                 this.setState({cardComponents: card});
     
             } else {
-                console.log("null");
+                // console.log("null");
                 this.setState({cardComponents: []});
             }
     
@@ -71,7 +90,16 @@ class Header extends Component {
     }
 
     render() {
-        //console.log("in the header component", this.state.loginInfo);
+        if(this.state.renderList===true){
+            let array = this.state.recievedData
+            console.log(array)
+            return(
+                array.map(item=>(
+                    <ListDisplay name={item.title} image={item.artUri}  />
+                ))
+                
+            )
+        }
         return (
 
             <div>

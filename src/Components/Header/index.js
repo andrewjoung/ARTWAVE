@@ -23,7 +23,7 @@ class Header extends Component {
     }
 
     componentDidMount = () => {
-        this.setState({page:"cinema", loginInfo: JSON.parse(localStorage.getItem("loginInfo"))});
+        this.setState({page:"cinema", loginInfo: this.props.location.state.loginInfo});
         //console.log("initial state = " + this.state.page);
         //console.log("in the header component", this.state.loginInfo)
         
@@ -54,6 +54,9 @@ class Header extends Component {
 
     apiCall = () => {
         //console.log("clicked nav state is now = " + this.state.page);
+        
+        console.log("in api call this is state that is passed in", this.state);
+
         let listSearchObject = {
             category: this.state.page,
             username: this.state.loginInfo.username
@@ -64,8 +67,9 @@ class Header extends Component {
             //     console.log(res.data.lists[i]._id)
             // }
             
-    
-            if(res.data !== null) {
+            if(res.data === null) {
+                this.apiCall();
+            } else if(res.data !== null) {
                 // console.log(res.data)
                 // console.log("entering");
                 let userListArray = res.data.lists;
@@ -76,25 +80,32 @@ class Header extends Component {
         
                 //console.log("inside if", listsToShow);
         
-                // let card = listsToShow.map(list => {
-                //     console.log(list.category);
-                //     return <ListCard onClick = {this.cardClick} category={list.category} listId = {list._id} listItem={list} />;
 
-                // });
 
                 let cardArray = [];
 
+                if(listsToShow.length <= 3) {
+                    let card = listsToShow.map(list => {
+                        console.log(list.category);
+                        return <ListCard onClick = {this.cardClick} category={list.category} listId = {list._id} listItem={list} />;
 
-                for(var i = 0; i < 4; i++) {
-                    let randomNum = Math.floor((Math.random() * listsToShow.length));
-                    cardArray.push(<ListCard onClick = {this.cardClick} category={listsToShow[randomNum].category} listId = {listsToShow[randomNum]._id} listItem={listsToShow[randomNum]} />);
+                    });
+
+                    this.setState({cardComponents: card});
+                } else {
+                    for(var i = 0; i < 4; i++) {
+                        //let randomNum = Math.floor((Math.random() * listsToShow.length));
+                        cardArray.push(<ListCard onClick = {this.cardClick} category={listsToShow[i].category} listId = {listsToShow[i]._id} listItem={listsToShow[i]} />);
+                    }
+                    this.setState({cardComponents: cardArray});
+    
                 }
+
                 
                 //card(listsToShow);
 
                 //console.log(card);
-                this.setState({cardComponents: cardArray});
-    
+                
             } else {
                 // console.log("null");
                 this.setState({cardComponents: []});

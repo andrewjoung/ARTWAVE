@@ -32,11 +32,11 @@ class Login extends Component {
         }
         API.loginUser(loginAttempt).then(res => {
             console.log(res.data);
+            localStorage.setItem("loginInfo", JSON.stringify(res.data));
             this.setState({
                 loggedIn: true,
                 loginInfo: res.data
             });
-            localStorage.setItem("loginInfo", JSON.stringify(res.data));
         }).catch(function(err) {
             console.log(err.response);
         });

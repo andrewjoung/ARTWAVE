@@ -55,8 +55,8 @@ class Form extends Component {
         else if (this.state.media === "music") {
           if (this.state.musicType === 'song') {
             id = object.search
-            axios.post(`http://localhost:8080/song/${object.search}/${object.name}`).then(data => {
-
+            axios.post(`http://localhost:8080/song/${object.search}/${object.name}`, this.state.listToUse).then(data => {
+              console.log("Music Data", data);
             }).catch(err => {
               console.log(err)
             })
@@ -64,8 +64,8 @@ class Form extends Component {
           //statement for album search, sends id and album name (basically does exact same search again, but this time uses a string comaprison to filter through the 20 list items that are being returned on back end)
           else if (this.state.musicType === 'album') {
             id = object.search;
-            axios.post(`http://localhost:8080/album/${object.search}/${object.name}`).then(data => {
-
+            axios.post(`http://localhost:8080/album/${object.search}/${object.name}`, this.state.listToUse).then(data => {
+              console.log("Music Data", data);
             }).catch(err => {
               console.log(err)
             })

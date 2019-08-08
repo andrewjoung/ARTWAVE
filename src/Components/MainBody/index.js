@@ -214,7 +214,7 @@ function MainBody(props) {
 
         <div id="mainBody">
             {/* returning main body and category is {props.page} */}
-            <h3 className="pinnedText">Pinned Lists</h3>
+            <h4 className="pinnedText">Pinned Lists</h4>
             <div className="row">
                 {props.cards}
                 <div className="listActions">

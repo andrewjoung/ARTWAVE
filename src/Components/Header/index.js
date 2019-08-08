@@ -65,9 +65,9 @@ class Header extends Component {
                 // console.log("entering");
                 let userListArray = res.data.lists;
                 let filteredArray = userListArray.filter(list => list.category === this.state.page);
-                // console.log("filtered array", filteredArray);
-                let listsToShow = filteredArray.filter(list => list.items.length > 0);
-                // console.log("listsToShow", listsToShow);
+                console.log("filtered array", filteredArray);
+                let listsToShow = filteredArray.filter(list => list.pinned === true);
+                console.log("listsToShow", listsToShow);
         
                 //console.log("inside if", listsToShow);
         
@@ -103,8 +103,14 @@ class Header extends Component {
         return (
 
             <div>
-                <div id="userInformation">
+                <div id="userInformation" className="row">
+                    <div className="userAvatar">
 
+                    </div>
+                    <div className="col userName">
+                        <h3>Hello, </h3>
+                        <h1>{this.state.loginInfo.firstName}</h1>
+                    </div>
                 </div>
 
                 <ul className="nav nav-tabs" id="myTab" role="tablist">

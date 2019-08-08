@@ -11,6 +11,7 @@ class CreateList extends Component {
         loginInfo:{},
         listTitle:"",
         listInfo:{},
+        listPinned : false,
         titleSubmitted: false
     }
 
@@ -36,7 +37,8 @@ class CreateList extends Component {
         let listData = {
             username: this.state.loginInfo.username,
             title: this.state.listTitle,
-            category: this.state.category
+            category: this.state.category,
+            pinned: this.state.listPinned
         }
 
         api.createList(listData).then(res => {
@@ -51,6 +53,17 @@ class CreateList extends Component {
         });
     }
 
+    changeFavoriteColor = event => {
+        if(this.state.listPinned === false) {
+            event.target.id = "clickedFavoriteIcon";
+            this.setState({listPinned: true});
+            console.log(event.target.className);
+        } else {
+            event.target.id = "favoriteIcon";
+            this.setState({listPinned: false});
+        }
+    }
+
     render() {
         console.log("The state of create list", this.state);
         if(this.state.titleSubmitted === false) {
@@ -62,6 +75,8 @@ class CreateList extends Component {
     
                         <input value={this.state.listTitle} name="title" type="text" onChange={this.handleChange} id="listTitle" className="form-control mb-4" placeholder="Title" />
     
+                        <i className="fas fa-star fa-lg" id="favoriteIcon" onClick={this.changeFavoriteColor}></i>
+
                         <button className="btn btn-info btn-block my-4" id="createList" type="submit" onClick={this.handleClick} disabled={!this.state.listTitle}>Create List</button>
     
                     </form>

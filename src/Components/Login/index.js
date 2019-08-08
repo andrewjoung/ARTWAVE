@@ -36,6 +36,7 @@ class Login extends Component {
                 loggedIn: true,
                 loginInfo: res.data
             });
+            localStorage.setItem("loginInfo", JSON.stringify(res.data));
         }).catch(function(err) {
             console.log(err.response);
         });

@@ -3,11 +3,15 @@ import "./style.css";
 import MainBody from "../MainBody";
 import ListCard from "../ListCard";
 import api from '../../API/api';
+import ProfileInfo from "../ProfileInfo";
+// import FindFriends from "../FindFriends";
+import {Link} from "react-router-dom";
 import Axios from "axios";
 import ListDisplay from '../ListDisplay'
 const style = {
     color:'white'
 }
+
 class Header extends Component {
 
     state = {
@@ -19,11 +23,12 @@ class Header extends Component {
     }
 
     componentDidMount = () => {
-        this.setState({page:"cinema", loginInfo: this.props.location.state.loginInfo});
+        this.setState({page:"cinema", loginInfo: JSON.parse(localStorage.getItem("loginInfo"))});
         //console.log("initial state = " + this.state.page);
         //console.log("in the header component", this.state.loginInfo)
         
         console.log("component did mount");
+        console.log(JSON.parse(localStorage.getItem("loginInfo")));
 
         this.apiCall();
     }
@@ -51,7 +56,7 @@ class Header extends Component {
         //console.log("clicked nav state is now = " + this.state.page);
         let listSearchObject = {
             category: this.state.page,
-            username: this.props.location.state.loginInfo.username
+            username: this.state.loginInfo.username
         }
 
         api.getLists(listSearchObject).then(res => {
@@ -89,6 +94,13 @@ class Header extends Component {
         });
     }
 
+    friendsTest = [
+        "friend1",
+        "friend2",
+        "friend3",
+        "friend4"
+    ];
+
     render() {
         if(this.state.renderList===true){
             let array = this.state.recievedData
@@ -111,6 +123,9 @@ class Header extends Component {
                         <h3>Hello, </h3>
                         <h1>{this.state.loginInfo.firstName}</h1>
                     </div>
+                    <Link to="/findFriends">
+                        <button className="btn btn-primary">Find Friends</button>
+                    </Link>
                 </div>
 
                 <ul className="nav nav-tabs" id="myTab" role="tablist">

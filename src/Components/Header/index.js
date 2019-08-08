@@ -12,7 +12,7 @@ const style = {
     color: 'white'
 }
 const style2 = {
-    width:'80%'
+    width: '100%'
 }
 
 class Header extends Component {
@@ -22,7 +22,8 @@ class Header extends Component {
         loginInfo: {},
         cardComponents: [],
         recievedData: [],
-        renderList: false
+        renderList: false,
+        textarea: ''
     }
 
     componentDidMount = () => {
@@ -47,12 +48,28 @@ class Header extends Component {
         console.log("handleClickCheck", this.state);
 
     }
+    handleChange = (event) => {
+
+        console.log(event.target)
+        const { name, value } = event.target;
+
+        // console.log(event.target)
+
+        // Updating the input's state
+        this.setState({
+            [name]: value
+        });
+    }
 
     cardClick = (id, category) => {
         Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
             // console.log(data.data)
             this.setState({ recievedData: data.data, renderList: true })
         })
+    }
+
+    sendComment = ()=>{
+        console.log('this is checking')
     }
 
     apiCall = () => {
@@ -125,36 +142,50 @@ class Header extends Component {
     ];
 
     render() {
+        /// Group of ListDisplays based on which type of list was clicked, each passes in same props
         if (this.state.renderList === true) {
             let array = this.state.recievedData
-            console.log(array)
+            // Return of list items if cinema is clicked on
             if (this.state.page === 'cinema')
                 return (
                     <div className="container">
                         {array.map(item => (
                             <ListDisplay synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.director} />
                         ))}
-                        
-                        <div  className='container-fluid'>
-                            <textarea style={style2}></textarea>
+
+                        <div className='container-fluid'>
+                            <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
+                            <button onClick={this.sendComment} style={style2} className="btn btn-success">Submit Comment</button>
                         </div>
                     </div>
 
                 )
+            // Return of list items if cinema literature is clicked
             else if (this.state.page === 'literature') {
                 return (
-                    array.map(item => (
-                        <ListDisplay synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author} />
-                    ))
+                    <div className='container'>
+                        {array.map(item => (
+                            <ListDisplay synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author} />
+                        ))}
+                        <div className='container-fluid'>
+                            <textarea name="textarea" onChange={this.handleChange} value={this.state.textarea} style={style2}></textarea>
+                            <button onClick={this.sendComment} className="btn btn-success form-block"></button>
+                        </div>
+                    </div>
                 )
             }
+            // Return of list items if not cinema or literature (aka has to be music, either songs or albums)
             else {
                 console.log(array);
                 return (
-                    <div>
+                    <div className='container'>
                         {array.map(item => (
                             <ListDisplay id={item._id} image={item.artUri} artist={item.artist} name={item.albumTitle} />
                         ))}
+                        <div className='container-fluid'>
+                            <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
+                            <button onClick={this.sendComment} className="btn btn-success form-block">Submit Comment</button>
+                        </div>
 
                     </div>
                 )

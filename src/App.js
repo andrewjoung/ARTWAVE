@@ -6,7 +6,6 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import CreateList from "./Components/CreateList"
 import Search from '../src/Components/Search';
-import Lists from './Components/Lists';
 import Friends from "./Components/Friends";
 import FindFriends from "./Components/FindFriends";
 
@@ -20,7 +19,6 @@ function App() {
         <Route exact path="/main" component={Header} />
         <Route exact path="/create-list" component={CreateList} />
         <Route exact path="/search" component={Search}/>
-        <Route exact path = '/lists' component = {Lists}/>
         <Route exact path="/friends" component={Friends}/>
         <Route exact path="/findFriends" component={FindFriends}/>
       </div>

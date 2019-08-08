@@ -1,11 +1,34 @@
 #userInformation {
-    height: 200px;
+    height: 225px;
     background-color:#373737;
+    padding-left: 8vw;
+    padding-right: 3vw;
+    padding-top: 5vh;
+    text-align: left;
 }
 
+#userInformation h1 {
+    text-align:left;
+    color: white;
+}
+
+.userAvatar {
+    background-color:white;
+    width: 145px; 
+    height: 145px;
+    border-radius: 50%;
+}
+
+.row {
+    position:relative;
+}
+
+.userName {
+    padding-top: 60px;
+}
 #myTab {
     background-color:#373737;
-    padding-left: 2vw;
+    padding-left: 8vw;
 }
 
 #userPicture {
@@ -20,7 +43,7 @@
 }
 
 #cinema-tab, #profile-tab, #contact-tab {
-    color: #6e1818;
+    color: #a8a8a8;
 }
 
 body, .nav-tabs .nav-link.active {
@@ -30,4 +53,5 @@ body, .nav-tabs .nav-link.active {
 
 .nav-tabs {
     border: none;
+    /* margin-right: 2vw; */
 }

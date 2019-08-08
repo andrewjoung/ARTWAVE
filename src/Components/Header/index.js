@@ -11,6 +11,9 @@ import ListDisplay from '../ListDisplay'
 const style = {
     color: 'white'
 }
+const style2 = {
+    width:'80%'
+}
 
 class Header extends Component {
 
@@ -131,6 +134,10 @@ class Header extends Component {
                         {array.map(item => (
                             <ListDisplay synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.director} />
                         ))}
+                        
+                        <div  className='container-fluid'>
+                            <textarea style={style2}></textarea>
+                        </div>
                     </div>
 
                 )
@@ -141,12 +148,15 @@ class Header extends Component {
                     ))
                 )
             }
-            else{
+            else {
                 console.log(array);
-                return(
-                    array.map(item=>(
-                        <ListDisplay id={item._id} image = {item.artUri} artist={item.artist} name={item.albumTitle} />
-                    ))
+                return (
+                    <div>
+                        {array.map(item => (
+                            <ListDisplay id={item._id} image={item.artUri} artist={item.artist} name={item.albumTitle} />
+                        ))}
+
+                    </div>
                 )
             }
         }

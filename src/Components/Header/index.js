@@ -142,10 +142,10 @@ class Header extends Component {
                 )
             }
             else{
-                console.log('checking here')
+                console.log(array);
                 return(
                     array.map(item=>(
-                        <ListDisplay />
+                        <ListDisplay id={item._id} image = {item.artUri} artist={item.artist} name={item.albumTitle} />
                     ))
                 )
             }

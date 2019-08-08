@@ -4,7 +4,7 @@
     margin-right: 20px;
     margin-left: 20px;
     padding:0;
-    background-color:#181818;
+    /* background-color:#181818; */
 }
 
 .card-title {
@@ -16,4 +16,76 @@
 
 .card:hover {
     background-color: black !important;
+}
+
+.listCard1 {
+    background-image:url("../../images/texture1.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard2 {
+    background-image:url("../../images/texture8.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard3 {
+    background-image:url("../../images/texture2.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard4 {
+    background-image:url("../../images/texture6.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard5 {
+    background-image:url("../../images/texture6.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard6 {
+    background-image:url("../../images/testing2.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard7 {
+    background-image:url("../../images/texture3.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard8 {
+    background-image:url("../../images/texture4.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard9 {
+    background-image:url("../../images/texture9.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard10 {
+    background-image:url("../../images/texture5.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard11 {
+    background-image:url("../../images/texture11.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.listCard12 {
+    background-image:url("../../images/texture12.jpg");
+    background-size:cover;
+    background-position:center;
 }

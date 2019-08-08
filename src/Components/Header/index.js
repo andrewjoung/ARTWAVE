@@ -8,6 +8,8 @@ import ProfileInfo from "../ProfileInfo";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import ListDisplay from '../ListDisplay'
+
+
 const style = {
     color: 'white'
 }
@@ -105,9 +107,19 @@ class Header extends Component {
                 let cardArray = [];
 
                 if (listsToShow.length <= 3) {
+                    let count = 0;
+                    if(this.state.page === "cinema") {
+                        count = 0;
+                    } else if (this.state.page === "literature") {
+                       count = 4;
+                    } else if (this.state.page === "music") {
+                       count = 8;
+                    }
                     let card = listsToShow.map(list => {
                         console.log(list.category);
-                        return <ListCard onClick={this.cardClick} category={list.category} listId={list._id} listItem={list} />;
+                        count++;
+                        let id = "listCard" + count;
+                        return <ListCard id={id} onClick={this.cardClick} category={list.category} listId={list._id} listItem={list} />;
 
                     });
 
@@ -115,7 +127,16 @@ class Header extends Component {
                 } else {
                     for (var i = 0; i < 4; i++) {
                         //let randomNum = Math.floor((Math.random() * listsToShow.length));
-                        cardArray.push(<ListCard onClick={this.cardClick} category={listsToShow[i].category} listId={listsToShow[i]._id} listItem={listsToShow[i]} />);
+                        let id=""
+                        if(this.state.page === "cinema") {
+                            id = "listCard" + (i + 1);
+                        } else if (this.state.page === "literature") {
+                            id = "listCard" + (i + 5);
+                        } else if (this.state.page === "music") {
+                            id = "listCard" + (i + 9);
+                        }
+
+                        cardArray.push(<ListCard id={id} onClick={this.cardClick} category={listsToShow[i].category} listId={listsToShow[i]._id} listItem={listsToShow[i]} />);
                     }
                     this.setState({ cardComponents: cardArray });
 

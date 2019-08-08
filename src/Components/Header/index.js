@@ -3,6 +3,9 @@ import "./style.css";
 import MainBody from "../MainBody";
 import ListCard from "../ListCard";
 import api from '../../API/api';
+import ProfileInfo from "../ProfileInfo";
+// import FindFriends from "../FindFriends";
+import {Link} from "react-router-dom";
 
 class Header extends Component {
 
@@ -13,11 +16,12 @@ class Header extends Component {
     }
 
     componentDidMount = () => {
-        this.setState({page:"cinema", loginInfo: this.props.location.state.loginInfo});
+        this.setState({page:"cinema", loginInfo: JSON.parse(localStorage.getItem("loginInfo"))});
         //console.log("initial state = " + this.state.page);
         //console.log("in the header component", this.state.loginInfo)
         
         console.log("component did mount");
+        console.log(JSON.parse(localStorage.getItem("loginInfo")));
 
         this.apiCall();
     }
@@ -38,7 +42,7 @@ class Header extends Component {
         //console.log("clicked nav state is now = " + this.state.page);
         let listSearchObject = {
             category: this.state.page,
-            username: this.props.location.state.loginInfo.username
+            username: this.state.loginInfo.username
         }
 
         api.getLists(listSearchObject).then(res => {
@@ -70,13 +74,22 @@ class Header extends Component {
         });
     }
 
+    friendsTest = [
+        "friend1",
+        "friend2",
+        "friend3",
+        "friend4"
+    ];
+
     render() {
         //console.log("in the header component", this.state.loginInfo);
         return (
 
             <div>
                 <div id="userInformation">
-
+                    <Link to="/findFriends">
+                        <button className="btn btn-primary">Find Friends</button>
+                    </Link>
                 </div>
 
                 <ul className="nav nav-tabs" id="myTab" role="tablist">

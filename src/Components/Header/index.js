@@ -25,7 +25,8 @@ class Header extends Component {
         cardComponents: [],
         recievedData: [],
         renderList: false,
-        textarea: ''
+        textarea: '',
+        cardClickId:''
     }
 
     componentDidMount = () => {
@@ -52,7 +53,7 @@ class Header extends Component {
     }
     handleChange = (event) => {
 
-        console.log(event.target)
+        // console.log(event.target)
         const { name, value } = event.target;
 
         // console.log(event.target)
@@ -65,13 +66,18 @@ class Header extends Component {
 
     cardClick = (id, category) => {
         Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
-            // console.log(data.data)
-            this.setState({ recievedData: data.data, renderList: true })
+            console.log(data.data)
+            this.setState({ recievedData: data.data.array, renderList: true, cardClickId: data.data.id })
+
+
         })
     }
-
-    sendComment = ()=>{
-        console.log('this is checking')
+    //axios call used to send data to backend of user comment, should send list Id and comment string
+    sendComment = (id) => {
+        console.log(id)
+        Axios.post(`http://localhost:8080/commentSubmit`,{id:this.state.loginInfo, comment:this.state.textarea,listId:this.state.cardClickId}).then(data=>{
+            console.log(data)
+        })
     }
 
     apiCall = () => {
@@ -108,12 +114,12 @@ class Header extends Component {
 
                 if (listsToShow.length <= 3) {
                     let count = 0;
-                    if(this.state.page === "cinema") {
+                    if (this.state.page === "cinema") {
                         count = 0;
                     } else if (this.state.page === "literature") {
-                       count = 4;
+                        count = 4;
                     } else if (this.state.page === "music") {
-                       count = 8;
+                        count = 8;
                     }
                     let card = listsToShow.map(list => {
                         console.log(list.category);
@@ -127,8 +133,8 @@ class Header extends Component {
                 } else {
                     for (var i = 0; i < 4; i++) {
                         //let randomNum = Math.floor((Math.random() * listsToShow.length));
-                        let id=""
-                        if(this.state.page === "cinema") {
+                        let id = ""
+                        if (this.state.page === "cinema") {
                             id = "listCard" + (i + 1);
                         } else if (this.state.page === "literature") {
                             id = "listCard" + (i + 5);
@@ -167,30 +173,31 @@ class Header extends Component {
         if (this.state.renderList === true) {
             let array = this.state.recievedData
             // Return of list items if cinema is clicked on
-            if (this.state.page === 'cinema')
+            if (this.state.page === 'cinema') {
                 return (
                     <div className="container">
                         {array.map(item => (
-                            <ListDisplay synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.director} />
+                            <ListDisplay clickId={this.state.cardClickId} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.director} />
                         ))}
 
                         <div className='container-fluid'>
                             <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={this.sendComment} style={style2} className="btn btn-success">Submit Comment</button>
+                            <button onClick={()=>this.sendComment(this.state.cardClickId)} style={style2} className="btn btn-success">Submit Comment</button>
                         </div>
                     </div>
 
                 )
+            }
             // Return of list items if cinema literature is clicked
             else if (this.state.page === 'literature') {
                 return (
                     <div className='container'>
                         {array.map(item => (
-                            <ListDisplay synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author} />
+                            <ListDisplay clickId={this.state.cardClickId} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author} />
                         ))}
                         <div className='container-fluid'>
                             <textarea name="textarea" onChange={this.handleChange} value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={this.sendComment} className="btn btn-success form-block"></button>
+                            <button onClick={this.sendComment} className="btn btn-success form-block">Submit Comment</button>
                         </div>
                     </div>
                 )
@@ -201,7 +208,7 @@ class Header extends Component {
                 return (
                     <div className='container'>
                         {array.map(item => (
-                            <ListDisplay id={item._id} image={item.artUri} artist={item.artist} name={item.albumTitle} />
+                            <ListDisplay clickId={this.state.cardClickId} id={item._id} image={item.artUri} artist={item.artist} name={item.albumTitle} />
                         ))}
                         <div className='container-fluid'>
                             <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>

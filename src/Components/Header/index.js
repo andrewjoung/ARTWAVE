@@ -8,6 +8,7 @@ import ProfileInfo from "../ProfileInfo";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import ListDisplay from '../ListDisplay'
+import Recommended from "../Recommended"
 
 
 const style = {
@@ -29,11 +30,7 @@ class Header extends Component {
     }
 
     componentDidMount = () => {
-<<<<<<< HEAD
-        this.setState({page:"cinema", loginInfo: JSON.parse(localStorage.getItem("loginInfo"))});
-=======
         this.setState({ page: "cinema", loginInfo: JSON.parse(localStorage.getItem('loginInfo')) });
->>>>>>> d2358280dbbe95495fbed37e8c26c19a621c205b
         //console.log("initial state = " + this.state.page);
         //console.log("in the header component", this.state.loginInfo)
 
@@ -228,10 +225,10 @@ class Header extends Component {
                         <h1>{this.state.loginInfo.firstName}</h1>
                     </div>
                     <Link to="/findFriends">
-                        <button className="btn btn-primary">Find Friends</button>
+                        <button className="btn btn-md" style={{backgroundColor: "#B33434"}}>Find Friends</button>
                     </Link>
                     <Link to="/friends">
-                        <button className="btn btn-primary">View Friends</button>
+                        <button className="btn btn-md" style={{backgroundColor: "#B33434"}}>View Friends</button>
                     </Link>
                 </div>
 
@@ -249,6 +246,7 @@ class Header extends Component {
                 <div className="tab-content" id="myTabContent">
 
                     <MainBody page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents} />
+                    <Recommended />
                     {/* {this.setComponentTimeout} */}
                 </div>
             </div>

@@ -139,7 +139,7 @@ class CreateList extends Component {
                 <div className="container">
                     <form className="text-center" action="#!">
     
-                        <p className="h4 mb-4">Sign in</p>
+                        <p className="h4 mb-4">create a new <span style={{color: "#B33434"}}>{this.state.category}</span> list</p>
     
                         <input value={this.state.listTitle} name="title" type="text" onChange={this.handleChange} id="listTitle" className="form-control mb-4" placeholder="Title" />
     
@@ -155,7 +155,7 @@ class CreateList extends Component {
                     <div className="row imageDiv">
                         {this.state.imagesComponents3}
                     </div> */}
-                    <button className="btn btn-info btn-block my-4" id="createList" type="submit" onClick={this.handleClick} disabled={!this.state.listTitle}>Create List</button>
+                    <button className="btn btn-block my-4" id="createList" type="submit" onClick={this.handleClick} disabled={!this.state.listTitle} style={{backgroundColor: "#B33434"}}>Create List</button>
                 </div>
             );
         } else if (this.state.titleSubmitted === true) {

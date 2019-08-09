@@ -1,3 +1,16 @@
 p {
     color: white;
+    text-align: center;
+}
+
+.friendBox {
+    width: 145px;
+    margin: 20px;
+}
+
+.container {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+
 }

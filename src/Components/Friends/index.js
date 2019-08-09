@@ -30,9 +30,14 @@ class Friends extends Component {
     render = () => {
         if (this.state.hasFriends) {        
             return (
-                <div>
+                <div className="container">
                     {this.state.friends.map(friend => {
-                        return <p>{friend.firstName} {friend.lastName}</p>
+                        return (
+                            <div className="friendBox">
+                                <div className="userAvatar"></div>
+                                <p>{friend.firstName} {friend.lastName}</p>
+                            </div>
+                        )
                     })}
                 </div>
             );

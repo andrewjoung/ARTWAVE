@@ -1,0 +1,29 @@
+h1 {
+    text-align: center;
+    font-weight: 400;
+}
+
+#art {
+    color: maroon;
+}
+
+#wave {
+    color: white;
+}
+
+/* #username, #pw {
+    width: 100%;
+    margin: 5px;
+} */
+
+#inputBox {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.btn {
+    margin: 10px;
+    background-color: maroon;
+    color: white;
+    font-weight: 400;
+}

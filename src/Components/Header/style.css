@@ -1,0 +1,61 @@
+#userInformation {
+    height: 225px;
+    background-color:#373737;
+    padding-left: 8vw;
+    padding-right: 3vw;
+    padding-top: 5vh;
+    text-align: left;
+}
+
+#userInformation h1 {
+    text-align:left;
+    color: white;
+}
+
+.userAvatar {
+    background-color:white;
+    width: 145px; 
+    height: 145px;
+    border-radius: 50%;
+}
+
+.row {
+    position:relative;
+}
+
+.userName {
+    padding-top: 60px;
+}
+#myTab {
+    background-color:#373737;
+    padding-left: 8vw;
+}
+
+#userPicture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color:white;
+}
+
+#cinema-tab.active, #profile-tab.active, #contact-tab.active {
+    color: #e54242;
+}
+
+#cinema-tab, #profile-tab, #contact-tab {
+    color: #a8a8a8;
+}
+
+body, .nav-tabs .nav-link.active {
+    background-color: #222222;
+    border: none;
+}
+
+.nav-tabs {
+    border: none;
+    /* margin-right: 2vw; */
+}
+
+h3 {
+    margin-left: 15px;
+}

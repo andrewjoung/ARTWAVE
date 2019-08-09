@@ -1,0 +1,25 @@
+#favoriteIcon {
+    color: white;
+}
+
+#clickedFavoriteIcon {
+    color: #e54242;
+}
+
+.imageOption {
+    height: 15vw;
+}
+
+.imageOption {
+    /* background-color:white !important; */
+    margin: 5px;
+}
+
+.container {
+    color: white;
+}
+/* .imageOption {
+    background-image:url("../../images/texture1.jpg");
+    background-size:cover;
+    background-position:center;
+} */

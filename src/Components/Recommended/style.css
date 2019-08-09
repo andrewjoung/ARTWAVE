@@ -1,0 +1,10 @@
+.recHeader {
+    color: #e54242;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#recBody {
+    padding-left: 8vw;
+    padding-right: 8vw;
+}

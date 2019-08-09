@@ -1,0 +1,12 @@
+li, h2, h3 {
+    color: white;
+}
+
+hr {
+    background-color: white;
+}
+
+.btn .btn-sm {
+    font-size: 1rem;
+    padding: .15rem .5rem;
+}

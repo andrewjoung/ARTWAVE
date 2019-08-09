@@ -55,3 +55,7 @@ body, .nav-tabs .nav-link.active {
     border: none;
     /* margin-right: 2vw; */
 }
+
+h3 {
+    margin-left: 15px;
+}

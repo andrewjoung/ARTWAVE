@@ -19,6 +19,9 @@ export default {
         return axios.get("http://localhost:8080/users/" + id);
     },
     addFriend: (addFriendData) => {
-        return axios.post("http://localhost:8080/addFriend", addFriendData);
+        return axios.put("http://localhost:8080/addFriend", addFriendData);
+    },
+    getUserFriends: (id) => {
+        return axios.get("http://localhost:8080/getFriends/" + id);
     }
 };

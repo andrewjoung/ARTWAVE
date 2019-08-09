@@ -6,7 +6,9 @@ import API from "../../API/api";
 class FindFriends extends Component {
     state = {
         loginInfo: JSON.parse(localStorage.getItem("loginInfo")),
-        friends: []
+        friends: [],
+        // TODO: Add a list of logged in user's current friends to avoid displaying them to the user to add
+        currentFriends: JSON.parse(localStorage.getItem("loginInfo")).friends
     }    
 
     componentDidMount = () => {
@@ -21,16 +23,28 @@ class FindFriends extends Component {
     }
 
     addFriend = event => {
-        console.log(event.target.name);
-        this.setState(
-            {friends: this.state.friends.push(event.target.name)}
-        )
+        const friendId = event.target.name;
+        console.log(friendId);
         const addFriendData = {
             userId: this.state.loginInfo.id,
-            friendId: event.target.name
+            friendId
         };
         API.addFriend(addFriendData).then(res => {
             console.log(res.data);
+
+            let newLoginInfo = this.state.loginInfo;
+            newLoginInfo.friends.push(friendId);
+            // console.log(newLoginInfo);
+            localStorage.setItem("loginInfo", JSON.stringify(newLoginInfo));
+
+            const newCurrent = this.state.currentFriends;
+            newCurrent.push(friendId);
+            console.log(newCurrent);
+
+            this.setState({
+                currentFriends: newCurrent
+            });
+
         }).catch(err => {
             console.log(err);
         });
@@ -43,7 +57,7 @@ class FindFriends extends Component {
                 <hr/>
                 <h3>Available Friends:</h3>
                 <ul>
-                    {this.state.friends.map(friend => {
+                    {this.state.friends.filter(friendObj => !this.state.currentFriends.includes(friendObj._id)).map(friend => {
                         return (
                             <div>
                                 <li>

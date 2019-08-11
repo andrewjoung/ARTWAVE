@@ -66,17 +66,20 @@ class Header extends Component {
     }
 
     cardClick = (id, category) => {
-        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+        Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
             console.log(data.data)
+            console.log('checkd2')
             this.setState({ recievedData: data.data.array, renderList: true, cardClickId: data.data.id })
 
 
+        }).catch(err => {
+            console.log(err);
         })
     }
     //axios call used to send data to backend of user comment, should send list Id and comment string
     sendComment = (id) => {
         console.log(id)
-        Axios.post(`http://localhost:8080/commentSubmit`,{id:this.state.loginInfo, comment:this.state.textarea,listId:this.state.cardClickId}).then(data=>{
+        Axios.post(`https://artwave-api.herokuapp.com/commentSubmit`,{id:this.state.loginInfo, comment:this.state.textarea,listId:this.state.cardClickId}).then(data=>{
             console.log(data)
         })
     }
@@ -162,17 +165,11 @@ class Header extends Component {
         });
     }
 
-    friendsTest = [
-        "friend1",
-        "friend2",
-        "friend3",
-        "friend4"
-    ];
-
     render() {
         /// Group of ListDisplays based on which type of list was clicked, each passes in same props
         if (this.state.renderList === true) {
             let array = this.state.recievedData
+            console.log(array,this.state.recievedData)
             // Return of list items if cinema is clicked on
             if (this.state.page === 'cinema') {
                 return (

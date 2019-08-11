@@ -206,7 +206,7 @@ class Header extends Component {
                         ))}
                         <div className='container-fluid'>
                             <textarea name="textarea" onChange={this.handleChange} value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={()=>this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
+                            <button onClick={() => this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
                         </div>
                     </div>
                 )
@@ -224,7 +224,7 @@ class Header extends Component {
                         ))}
                         <div className='container-fluid'>
                             <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={()=>this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
+                            <button onClick={() => this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
                         </div>
 
                     </div>

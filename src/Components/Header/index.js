@@ -3,117 +3,83 @@ import "./style.css";
 import MainBody from "../MainBody";
 import ListCard from "../ListCard";
 import api from '../../API/api';
-import ProfileInfo from "../ProfileInfo";
-// import FindFriends from "../FindFriends";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Axios from "axios";
-import ListDisplay from '../ListDisplay'
-import Recommended from "../Recommended"
-
+import Recommended from "../Recommended";
+// import ListDisplay from '../ListDisplay'
+// import List from "../List";
 
 const style = {
     color: 'white'
 }
+
 const style2 = {
     width: '100%'
 }
 
 class Header extends Component {
-
     state = {
         page: "",
         loginInfo: {},
         cardComponents: [],
         recievedData: [],
         renderList: false,
-        textarea: '',
+        // textarea: '',
         cardClickId: '',
         currentComments: []
     }
 
+    //
     componentDidMount = () => {
         this.setState({ page: "cinema", loginInfo: JSON.parse(localStorage.getItem('loginInfo')) });
-        //console.log("initial state = " + this.state.page);
-        //console.log("in the header component", this.state.loginInfo)
-
-        console.log("component did mount");
-        console.log(JSON.parse(localStorage.getItem("loginInfo")));
-
         this.apiCall();
     }
 
+    //
     handleClick = event => {
-        //console.log(event.target.name);
         this.setState({
             page: event.target.name
         });
-
         this.apiCall();
-
-        console.log("handleClickCheck", this.state);
-
+        // console.log("handleClickCheck", this.state);
     }
-    handleChange = (event) => {
-
-        // console.log(event.target)
-        const { name, value } = event.target;
-
-        // console.log(event.target)
-
-        // Updating the input's state
-        this.setState({
-            [name]: value
-        });
-    }
-
+    
+    //
     cardClick = (id, category) => {
-        Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
-            console.log(data.data)
-            this.setState({ recievedData: data.data.array, renderList: true, cardClickId: data.data.id, currentComments: data.data.commentsArray });
-
-
+        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+            console.log(data)
+            this.setState({
+                recievedData: data.data,
+                renderList: true,
+                cardClickId: data.data._id,
+                currentComments: data.data.comments
+            });
         }).catch(err => {
             console.log(err);
-        })
+        });
     }
-    //axios call used to send data to backend of user comment, should send list Id and comment string
-    sendComment = (id) => {
-        console.log(id)
-        Axios.post(`http://localhost:8080/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
-            console.log(data)
-        })
-    }
-
+    
+    //
     apiCall = () => {
-        //console.log("clicked nav state is now = " + this.state.page);
-
         console.log("in api call this is state that is passed in", this.state);
-
+        
         let listSearchObject = {
             category: this.state.page,
             username: this.state.loginInfo.username
         }
-
+        
         api.getLists(listSearchObject).then(res => {
-            // for(var i = 0; i < res.data.lists.length; i++){
-            //     console.log(res.data.lists[i]._id)
-            // }
-
             if (res.data === null) {
                 this.apiCall();
             } else if (res.data !== null) {
-                // console.log(res.data)
-                // console.log("entering");
                 let userListArray = res.data.lists;
+                
                 let filteredArray = userListArray.filter(list => list.category === this.state.page);
                 console.log("filtered array", filteredArray);
+                
                 let listsToShow = filteredArray.filter(list => list.pinned === true);
                 console.log("listsToShow", listsToShow);
-
-                //console.log("inside if", listsToShow);
-
-
-
+                
                 let cardArray = [];
 
                 if (listsToShow.length <= 3) {
@@ -130,9 +96,8 @@ class Header extends Component {
                         count++;
                         let id = "listCard" + count;
                         return <ListCard id={id} onClick={this.cardClick} category={list.category} listId={list._id} listItem={list} />;
-
+                        
                     });
-
                     this.setState({ cardComponents: card });
                 } else {
                     for (var i = 0; i < 4; i++) {
@@ -145,90 +110,47 @@ class Header extends Component {
                         } else if (this.state.page === "music") {
                             id = "listCard" + (i + 9);
                         }
-
+                        
                         cardArray.push(<ListCard id={id} onClick={this.cardClick} category={listsToShow[i].category} listId={listsToShow[i]._id} listItem={listsToShow[i]} />);
                     }
                     this.setState({ cardComponents: cardArray });
-
                 }
-
-
-                //card(listsToShow);
-
-                //console.log(card);
-
             } else {
-                // console.log("null");
                 this.setState({ cardComponents: [] });
             }
-
         });
     }
 
+    // This function now lives in the List component
+    // handleChange = (event) => {
+    //     const { name, value } = event.target;
+    //     this.setState({
+    //         [name]: value
+    //     });
+    // }
+
+    // This function now lives in the List component
+    // sendComment = (id) => {
+    //     console.log(id)
+    //     Axios.post(`http://localhost:8080/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
+    //         console.log(data)
+    //     })
+    // }
+    
     render() {
-        /// Group of ListDisplays based on which type of list was clicked, each passes in same props
+        // Group of ListDisplays based on which type of list was clicked, each passes in same props
         if (this.state.renderList === true) {
-            let array = this.state.recievedData
-            let commentAray = this.state.currentComments
-
-            // Return of list items if cinema is clicked on
-            if (this.state.page === 'cinema') {
-                return (
-                    <div className="container">
-                        {array.map(item => (
-                            <ListDisplay comments={commentAray} clickId={this.state.cardClickId} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.director} />
-                        ))}
-                        {commentAray.map(comment => (
-                            <h1>{comment}</h1>
-                        ))}
-                        <div className='container-fluid'>
-                            <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={() => this.sendComment(this.state.cardClickId)} style={style2} className="btn btn-success">Submit Comment</button>
-                        </div>
-                    </div>
-
-                )
+            return (
+                // Redirect to List component when a ListCard is clicked
+                <Redirect push to={{
+                    pathname: "/list/" + this.state.page + "/" + this.state.cardClickId,
+                    state: {listData: this.state.receivedData}
+                }}
+                />
+                );
             }
-            // Return of list items if cinema literature is clicked
-            else if (this.state.page === 'literature') {
-                return (
-                    <div className='container'>
-                        {array.map(item => (
-                            <ListDisplay clickId={this.state.cardClickId} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author} />
-                        ))}
-                        {commentAray.map(comment => (
-                            <h1>{comment}</h1>
-                        ))}
-                        <div className='container-fluid'>
-                            <textarea name="textarea" onChange={this.handleChange} value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={() => this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
-                        </div>
-                    </div>
-                )
-            }
-            // Return of list items if not cinema or literature (aka has to be music, either songs or albums)
-            else {
-                console.log(array);
-                return (
-                    <div className='container'>
-                        {array.map(item => (
-                            <ListDisplay clickId={this.state.cardClickId} id={item._id} image={item.artUri} artist={item.artist} name={item.albumTitle} />
-                        ))}
-                        {commentAray.map(comment => (
-                            <h1>{comment}</h1>
-                        ))}
-                        <div className='container-fluid'>
-                            <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={() => this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
-                        </div>
-
-                    </div>
-                )
-            }
-        }
-        return (
-
-            <div>
+            return (
+                <div>
                 <div id="userInformation" className="row">
                     <div className="userAvatar">
 

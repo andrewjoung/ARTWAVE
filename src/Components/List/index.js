@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import "./style.css";
 import API from "../../API/api.js";
 import ListDisplay from "../ListDisplay";
+import ListItem from "../ListItem";
+
 
 class List extends Component {
     state = {
@@ -9,6 +11,7 @@ class List extends Component {
         category: this.props.match.params.category,
         // listData: this.props.location.state.listData
         listData: {},
+        listItems: [],
         listComments: [],
         renderList: false,
         textarea: ""
@@ -18,10 +21,11 @@ class List extends Component {
     componentDidMount = () => {
         console.log("Attempt to get list data");
         console.log("List ID: ", this.state.id, "\n");
-        API.getListData(this.state.id).then(data => {
+        API.getListData(this.state.id, this.state.category).then(data => {
             console.log("\nAxios response: ", data.data, "\n")
             this.setState({
                 listData: data.data,
+                // listItems: 
                 listComments: data.data.comments,
                 renderList: true
             });
@@ -90,9 +94,11 @@ class List extends Component {
                         <button id="shareListBtn" className="btn">Share This List</button>
                         <hr/>
 
-                        {this.state.listData.items.map(item => (
+                        {this.state.listData.items.map(itemId => (
                             <div>
-                                <ListDisplay comments={this.listComments} clickId={this.state.id} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author}/>
+                                {/* Change author/artist/director to creator/something universal */}
+                                {/* <ListDisplay comments={this.listComments} clickId={this.state.id} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author}/> */}
+                                <ListItem id={itemId} category={this.state.category}/>
                                 <hr className="underItemRule"/>
                             </div>
                         ))}

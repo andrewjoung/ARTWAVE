@@ -24,14 +24,23 @@ export default {
     getUserFriends: (id) => {
         return axios.get("http://localhost:8080/getFriends/" + id);
     },
-    getListData: (listId) => {
-        return axios.get("http://localhost:8080/list/" + listId);
+    getListData: (listId, category) => {
+        return axios.get("http://localhost:8080/list/" + category + "/" + listId);
     },
     createComment: (commentData) => {
         return axios.post("http://localhost:8080/commentSubmit", commentData);
     },
     addCommentToList: (updateData) => {
         return axios.put("http://localhost:8080/list/add_comment", updateData);
+    },
+    getMovieItem: (movieId) => {
+        return axios.get("http://localhost:8080/movie/" + movieId);
+    },
+    getMusicItem: (musicId) => {
+        return axios.get("http://localhost:8080/music/" + musicId);
+    },
+    getBookItem: (bookId) => {
+        return axios.get("http://localhost:8080/book/" + bookId);
     }
     // registerUser: (newUser) => {
     //     console.log(newUser);

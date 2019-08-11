@@ -46,6 +46,7 @@ class Header extends Component {
     
     //
     cardClick = (id, category) => {
+        // TODO: Refactor this to use the 'getListData' axios call in API - redundant routes on the backend
         Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
             console.log(data)
             this.setState({
@@ -144,17 +145,15 @@ class Header extends Component {
                 // Redirect to List component when a ListCard is clicked
                 <Redirect push to={{
                     pathname: "/list/" + this.state.page + "/" + this.state.cardClickId,
+                    // Passing in state here doesn't seem to be making it to the List component props
                     state: {listData: this.state.receivedData}
-                }}
-                />
-                );
-            }
-            return (
-                <div>
+                }}/>
+            );
+        }
+        return (
+            <div>
                 <div id="userInformation" className="row">
-                    <div className="userAvatar">
-
-                    </div>
+                    <div className="userAvatar"></div>
                     <div className="col userName">
                         <h3>Hello, </h3>
                         <h1>{this.state.loginInfo.firstName}</h1>
@@ -178,11 +177,10 @@ class Header extends Component {
                         <a className="nav-link" id="contact-tab" data-toggle="tab" name="music" role="tab">Music</a>
                     </li>
                 </ul>
-                <div className="tab-content" id="myTabContent">
 
+                <div className="tab-content" id="myTabContent">
                     <MainBody page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents} />
                     <Recommended />
-                    {/* {this.setComponentTimeout} */}
                 </div>
             </div>
         );

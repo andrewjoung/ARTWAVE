@@ -67,7 +67,7 @@ class Header extends Component {
     }
 
     cardClick = (id, category) => {
-        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+        Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
             console.log(data.data)
             this.setState({ recievedData: data.data.array, renderList: true, cardClickId: data.data.id, currentComments: data.data.commentsArray });
 
@@ -77,7 +77,7 @@ class Header extends Component {
     //axios call used to send data to backend of user comment, should send list Id and comment string
     sendComment = (id) => {
         console.log(id)
-        Axios.post(`http://localhost:8080/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
+        Axios.post(`https://artwave-api.herokuapp.com/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
             console.log(data)
         })
     }
@@ -178,6 +178,7 @@ class Header extends Component {
 
             // Return of list items if cinema is clicked on
             if (this.state.page === 'cinema') {
+                console.log(array)
                 return (
                     <div className="container">
                         {array.map(item => (
@@ -206,7 +207,7 @@ class Header extends Component {
                         ))}
                         <div className='container-fluid'>
                             <textarea name="textarea" onChange={this.handleChange} value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={() => this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
+                            <button onClick={this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
                         </div>
                     </div>
                 )
@@ -224,7 +225,7 @@ class Header extends Component {
                         ))}
                         <div className='container-fluid'>
                             <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={() => this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
+                            <button onClick={this.sendComment} className="btn btn-success form-block">Submit Comment</button>
                         </div>
 
                     </div>

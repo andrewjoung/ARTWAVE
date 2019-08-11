@@ -67,11 +67,13 @@ class Header extends Component {
     }
 
     cardClick = (id, category) => {
-        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+        Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
             console.log(data.data)
             this.setState({ recievedData: data.data.array, renderList: true, cardClickId: data.data.id, currentComments: data.data.commentsArray });
 
 
+        }).catch(err => {
+            console.log(err);
         })
     }
     //axios call used to send data to backend of user comment, should send list Id and comment string
@@ -162,13 +164,6 @@ class Header extends Component {
 
         });
     }
-
-    friendsTest = [
-        "friend1",
-        "friend2",
-        "friend3",
-        "friend4"
-    ];
 
     render() {
         /// Group of ListDisplays based on which type of list was clicked, each passes in same props

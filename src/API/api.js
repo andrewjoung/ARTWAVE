@@ -23,5 +23,6 @@ export default {
     },
     getUserFriends: (id) => {
         return axios.get("http://localhost:8080/getFriends/" + id);
-    }
+    },
+    
 };

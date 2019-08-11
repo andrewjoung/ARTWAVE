@@ -27,7 +27,8 @@ class Header extends Component {
         recievedData: [],
         renderList: false,
         textarea: '',
-        cardClickId:''
+        cardClickId: '',
+        currentComments: []
     }
 
     componentDidMount = () => {
@@ -68,8 +69,7 @@ class Header extends Component {
     cardClick = (id, category) => {
         Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
             console.log(data.data)
-            console.log('checkd2')
-            this.setState({ recievedData: data.data.array, renderList: true, cardClickId: data.data.id })
+            this.setState({ recievedData: data.data.array, renderList: true, cardClickId: data.data.id, currentComments: data.data.commentsArray });
 
 
         }).catch(err => {
@@ -79,7 +79,7 @@ class Header extends Component {
     //axios call used to send data to backend of user comment, should send list Id and comment string
     sendComment = (id) => {
         console.log(id)
-        Axios.post(`https://artwave-api.herokuapp.com/commentSubmit`,{id:this.state.loginInfo, comment:this.state.textarea,listId:this.state.cardClickId}).then(data=>{
+        Axios.post(`http://localhost:8080/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
             console.log(data)
         })
     }
@@ -169,18 +169,21 @@ class Header extends Component {
         /// Group of ListDisplays based on which type of list was clicked, each passes in same props
         if (this.state.renderList === true) {
             let array = this.state.recievedData
-            console.log(array,this.state.recievedData)
+            let commentAray = this.state.currentComments
+
             // Return of list items if cinema is clicked on
             if (this.state.page === 'cinema') {
                 return (
                     <div className="container">
                         {array.map(item => (
-                            <ListDisplay clickId={this.state.cardClickId} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.director} />
+                            <ListDisplay comments={commentAray} clickId={this.state.cardClickId} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.director} />
                         ))}
-
+                        {commentAray.map(comment => (
+                            <h1>{comment}</h1>
+                        ))}
                         <div className='container-fluid'>
                             <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={()=>this.sendComment(this.state.cardClickId)} style={style2} className="btn btn-success">Submit Comment</button>
+                            <button onClick={() => this.sendComment(this.state.cardClickId)} style={style2} className="btn btn-success">Submit Comment</button>
                         </div>
                     </div>
 
@@ -193,9 +196,12 @@ class Header extends Component {
                         {array.map(item => (
                             <ListDisplay clickId={this.state.cardClickId} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author} />
                         ))}
+                        {commentAray.map(comment => (
+                            <h1>{comment}</h1>
+                        ))}
                         <div className='container-fluid'>
                             <textarea name="textarea" onChange={this.handleChange} value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={this.sendComment} className="btn btn-success form-block">Submit Comment</button>
+                            <button onClick={() => this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
                         </div>
                     </div>
                 )
@@ -208,9 +214,12 @@ class Header extends Component {
                         {array.map(item => (
                             <ListDisplay clickId={this.state.cardClickId} id={item._id} image={item.artUri} artist={item.artist} name={item.albumTitle} />
                         ))}
+                        {commentAray.map(comment => (
+                            <h1>{comment}</h1>
+                        ))}
                         <div className='container-fluid'>
                             <textarea onChange={this.handleChange} name="textarea" value={this.state.textarea} style={style2}></textarea>
-                            <button onClick={this.sendComment} className="btn btn-success form-block">Submit Comment</button>
+                            <button onClick={() => this.sendComment(this.state.cardClickId)} className="btn btn-success form-block">Submit Comment</button>
                         </div>
 
                     </div>
@@ -229,10 +238,10 @@ class Header extends Component {
                         <h1>{this.state.loginInfo.firstName}</h1>
                     </div>
                     <Link to="/findFriends">
-                        <button className="btn btn-md" style={{backgroundColor: "#B33434"}}>Find Friends</button>
+                        <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>Find Friends</button>
                     </Link>
                     <Link to="/friends">
-                        <button className="btn btn-md" style={{backgroundColor: "#B33434"}}>View Friends</button>
+                        <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>View Friends</button>
                     </Link>
                 </div>
 

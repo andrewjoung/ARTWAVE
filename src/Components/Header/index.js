@@ -33,6 +33,7 @@ class Header extends Component {
     componentDidMount = () => {
         this.setState({ page: "cinema", loginInfo: JSON.parse(localStorage.getItem('loginInfo')) });
         this.apiCall();
+        
     }
 
     //
@@ -46,6 +47,7 @@ class Header extends Component {
     
     //
     cardClick = (id, category) => {
+        
         // TODO: Refactor this to use the 'getListData' axios call in API - redundant routes on the backend
         Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
             console.log(data)

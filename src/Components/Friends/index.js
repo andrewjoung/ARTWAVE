@@ -67,11 +67,11 @@ class Friends extends Component {
             );
         } 
         else if(this.state.viewFriend===true){
-            console.log(this.state.clickFriend)
+            console.log(this.state.clickFriend.username)
             return(
                 
                 <Redirect push to={{
-                    pathname : `/friends/${this.state.clickFriend}`
+                    pathname : `/friends/${this.state.clickFriend.username}`
                 }}/>
             // <ViewFriend user={this.state.clickFriend}/>
             )

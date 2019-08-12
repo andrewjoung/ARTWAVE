@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import api from '../../API/api';
 import { tsPropertySignature } from '@babel/types';
 
+const style={
+    display:'none'
+}
+
 function MainBody(props) {
 
     let category = "";
@@ -29,6 +33,23 @@ function MainBody(props) {
 
     // console.log("function shit", category);
     // console.log(props);
+    if(props.friend===true){
+        return(
+            <div id="mainBody">
+            {/* returning main body and category is {props.page} */}
+            <h4 className="pinnedText">Your Pinned Lists</h4>
+            <div className="row">
+                {props.cards}
+                <div style={style} className="listActions">
+                    <Link to="/list" className="action">See All</Link>
+                    <Link to={{ pathname: "/create-list", state: {loginInfo: props.loginInfo, category: props.page}}} className="action">Create List</Link>
+                    {/* <Link to="/create-list" loginInfo = {props.loginInfo} className="action">Create List</Link> */}
+                </div>
+            </div>
+            <hr/>
+        </div>
+        )
+    }
     return(
         <div id="mainBody">
             {/* returning main body and category is {props.page} */}

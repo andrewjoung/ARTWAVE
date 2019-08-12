@@ -153,7 +153,14 @@ class Header extends Component {
         return (
             <div>
                 <div id="userInformation" className="row">
-                    <div className="userAvatar"></div>
+                    <div
+                        className="userAvatar"
+                        // Just testing adding profile picture
+                        // style={{
+                        //     backgroundImage: "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/leonardo-dicaprio-at-the-beverly-wilshire-hotel-in-beverly-news-photo-98152663-1540332414.jpg)",
+                        //     border: "solid 2pt #B33434"
+                        // }}
+                    />
                     <div className="col userName">
                         <h3>Hello, </h3>
                         <h1>{this.state.loginInfo.firstName}</h1>

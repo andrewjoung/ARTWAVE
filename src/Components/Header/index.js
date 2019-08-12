@@ -49,7 +49,7 @@ class Header extends Component {
     cardClick = (id, category) => {
         
         // TODO: Refactor this to use the 'getListData' axios call in API - redundant routes on the backend
-        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+        Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
             console.log(data)
             this.setState({
                 recievedData: data.data,

@@ -18,6 +18,7 @@
     height: 145px;
     border-radius: 50%;
     background-size: cover;
+    border: solid 1px #e54242;
 }
 
 .row {
@@ -25,8 +26,15 @@
 }
 
 .userName {
-    padding-top: 60px;
+    padding-top: 50px;
 }
+
+#name {
+    font-size: 40px;
+    margin-top: 5px;
+    font-weight: 100;
+}
+
 #myTab {
     background-color:#373737;
     padding-left: 8vw;
@@ -39,12 +47,16 @@
     background-color:white;
 }
 
-#cinema-tab.active, #profile-tab.active, #contact-tab.active {
+#cinema-tab.active, #profile-tab.active, #contact-tab.active, #friend-tab.active {
     color: #e54242;
 }
 
-#cinema-tab, #profile-tab, #contact-tab {
+#cinema-tab, #profile-tab, #contact-tab, #friend-tab {
     color: #a8a8a8;
+}
+
+#friend-tab {
+    margin-left: 63vw;
 }
 
 body, .nav-tabs .nav-link.active {
@@ -57,6 +69,9 @@ body, .nav-tabs .nav-link.active {
     /* margin-right: 2vw; */
 }
 
-h3 {
+#hello {
     margin-left: 15px;
+    font-size: 25px;
+    font-weight: 100;
+    color:#a8a8a8;
 }

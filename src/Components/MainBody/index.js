@@ -41,7 +41,7 @@ function MainBody(props) {
                     {/* <Link to="/create-list" loginInfo = {props.loginInfo} className="action">Create List</Link> */}
                 </div>
             </div>
-            <hr/>
+            <hr id="line"/>
         </div>
     );
 }

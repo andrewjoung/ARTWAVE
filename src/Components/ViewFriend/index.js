@@ -10,7 +10,7 @@ class ViewFriend extends React.Component {
 
   state = {
     page: "cinema",
-    loginInfo: { username: this.props.user.username },
+    loginInfo: { username: this.props.match.params.username},
     cardComponents: [],
     recievedData: [],
     renderList: false,
@@ -22,7 +22,7 @@ class ViewFriend extends React.Component {
   cardClick = (id, category) => {
 
     // TODO: Refactor this to use the 'getListData' axios call in API - redundant routes on the backend
-    Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+    Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
       console.log(data)
       this.setState({
         recievedData: data.data,
@@ -46,7 +46,6 @@ class ViewFriend extends React.Component {
     this.apiCall()
   }
   apiCall = () => {
-    console.log("in api call this is state that is passed in", this.state);
 
     let listSearchObject = {
       category: this.state.page,
@@ -107,7 +106,6 @@ class ViewFriend extends React.Component {
     });
   }
   render() {
-
     if (this.state.renderList === true) {
       return (
         // Redirect to List component when a ListCard is clicked
@@ -118,16 +116,14 @@ class ViewFriend extends React.Component {
         }} />
       );
     }
-
-    console.log(this.props.user)
+    console.log(this.props.match.params)
     return (
-
       <div>
         <div id="userInformation" className="row">
           <div className="userAvatar"></div>
           <div className="col userName">
             <h3>Check out your friend, </h3>
-            <h1>{this.props.user.firstName}</h1>
+            <h1>{this.props.match.params.firstName}</h1>
           </div>
         </div>
 

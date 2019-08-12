@@ -9,6 +9,7 @@ import Search from '../src/Components/Search';
 import Friends from "./Components/Friends";
 import FindFriends from "./Components/FindFriends";
 import List from "./Components/List";
+import ViewFriend from './Components/ViewFriend'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/friends" component={Friends}/>
         <Route exact path="/findFriends" component={FindFriends}/>
         <Route path ="/list/:category/:id" component={List}/>
+        <Route path = '/friends/:id' component={ViewFriend}/>
       </div>
     </Router>
   );

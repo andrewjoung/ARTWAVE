@@ -103,8 +103,11 @@ class Form extends Component {
     e.preventDefault()
     //apio call to movies using input change states
     if (this.state.media === 'cinema') {
+      // console.log('hitting here')
       axios.post('https://artwave-api.herokuapp.com/movies', { title: this.state.title }).then(data => {
         this.setState({ array: data.data })
+      }).catch(err=>{
+        console.log(err)
       })
 
 

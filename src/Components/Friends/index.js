@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import API from "../../API/api";
 import "./style.css";
-import {Link} from "react-router-dom";
+import {Link,Redirect} from "react-router-dom";
 import Axios from 'axios';
 import ViewFriend from '../ViewFriend'
 
@@ -67,8 +67,13 @@ class Friends extends Component {
             );
         } 
         else if(this.state.viewFriend===true){
+            console.log(this.state.clickFriend)
             return(
-            <ViewFriend user={this.state.clickFriend}/>
+                
+                <Redirect push to={{
+                    pathname : `/friends/${this.state.clickFriend}`
+                }}/>
+            // <ViewFriend user={this.state.clickFriend}/>
             )
         } 
         else {

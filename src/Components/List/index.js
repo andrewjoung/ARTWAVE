@@ -18,8 +18,7 @@ class List extends Component {
     }
 
     // we have to make this api call here unless we can figure out how to pass all the api data from header through as a prop
-
-    callFunc = () =>{
+    componentDidMount = () => {
         console.log("Attempt to get list data");
         console.log("List ID: ", this.state.id, "\n");
         API.getListData(this.state.id, this.state.category).then(data => {
@@ -33,12 +32,6 @@ class List extends Component {
         }).catch(err => {
             console.log(err);
         });
-    }
-    componentDidMount = () => {
-        this.callFunc();
-        if(this.state.listData === {}){
-            this.callFunc()
-        }
     }
 
     //

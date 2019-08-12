@@ -47,19 +47,19 @@ class Header extends Component {
     
     //
     cardClick = (id, category) => {
+        
+        // TODO: Refactor this to use the 'getListData' axios call in API - redundant routes on the backend
         Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
-            console.log(data.data)
-            this.setState({ recievedData: data.data.array, renderList: true, cardClickId: data.data.id, currentComments: data.data.commentsArray });
-
-
-        })
-    }
-    //axios call used to send data to backend of user comment, should send list Id and comment string
-    sendComment = (id) => {
-        console.log(id)
-        Axios.post(`http://localhost:8080/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
             console.log(data)
-        })
+            this.setState({
+                recievedData: data.data,
+                renderList: true,
+                cardClickId: data.data._id,
+                currentComments: data.data.comments
+            });
+        }).catch(err => {
+            console.log(err);
+        });
     }
     
     //

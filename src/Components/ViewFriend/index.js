@@ -7,10 +7,11 @@ import Axios from "axios";
 import Recommended from "../Recommended";
 
 class ViewFriend extends React.Component {
+  
 
   state = {
     page: "cinema",
-    loginInfo: { username: this.props.match.params.username},
+    loginInfo: {username:this.props.match.params.id},
     cardComponents: [],
     recievedData: [],
     renderList: false,
@@ -116,14 +117,13 @@ class ViewFriend extends React.Component {
         }} />
       );
     }
-    console.log(this.props.match.params)
     return (
       <div>
         <div id="userInformation" className="row">
           <div className="userAvatar"></div>
           <div className="col userName">
             <h3>Check out your friend, </h3>
-            <h1>{this.props.match.params.firstName}</h1>
+            <h1>{this.state.loginInfo.username}</h1>
           </div>
         </div>
 
@@ -140,7 +140,7 @@ class ViewFriend extends React.Component {
         </ul>
 
         <div className="tab-content" id="myTabContent">
-          <MainBody page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents} />
+          <MainBody friend={true} page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents} />
           <Recommended />
         </div>
       </div>

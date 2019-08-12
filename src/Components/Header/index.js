@@ -33,6 +33,7 @@ class Header extends Component {
     componentDidMount = () => {
         this.setState({ page: "cinema", loginInfo: JSON.parse(localStorage.getItem('loginInfo')) });
         this.apiCall();
+        console.log(JSON.parse(localStorage.getItem('loginInfo')))
         
     }
 

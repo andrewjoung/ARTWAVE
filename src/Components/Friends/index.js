@@ -25,6 +25,7 @@ class Friends extends Component {
 
     componentDidMount = () => {
         API.getUserFriends(this.state.id).then(res => {
+            
             console.log(res.data);
             if (res.data.friends.length) {
                 this.setState({

@@ -13,9 +13,16 @@ class FindFriends extends Component {
 
     componentDidMount = () => {
         API.getFriends(this.state.loginInfo.id).then(res => {
+            let userName = []
             console.log(res.data);
+            for(var i = 0; i < res.data.length; i++){
+                if(res.data[i].username !== JSON.parse(localStorage.getItem('loginInfo')).username){
+                    userName.push(res.data[i])
+                }
+            }
+            console.log(userName)
             this.setState({
-                friends: res.data
+                friends: userName
             });
         }).catch(err => {
             console.log(err);

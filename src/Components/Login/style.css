@@ -33,6 +33,7 @@
 #loginContainer {
     padding-left: 20vw;
     padding-right: 20vw;
+    overflow-y: hidden;
 }
 
 #noAccount {

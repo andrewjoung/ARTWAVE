@@ -1,0 +1,16 @@
+.resultImage {
+    width: 17vw;
+    height: 24vw;
+    box-shadow: 5px 5px 10px black;
+}
+
+.searchItemDiv {
+    padding: 5px;
+}
+
+.searchItemTitle {
+    font-size: 10px;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 5px;
+}

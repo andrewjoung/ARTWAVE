@@ -64,18 +64,20 @@ class CreateList extends Component {
         console.log("The state of create list", this.state);
         if(this.state.titleSubmitted === false) {
             return(
-                <div className="container">
+                <div className="createListContainer">
                     <form className="text-center" action="#!">
     
-                        <p className="h4 mb-4">create a new <span style={{color: "#B33434"}}>{this.state.category}</span> list</p>
+                        <p id="promptText" className="h4 mb-4">Create a new <span style={{color: "#B33434"}}>{this.state.category}</span> list</p>
     
                         <input value={this.state.listTitle} name="title" type="text" onChange={this.handleChange} id="listTitle" className="form-control mb-4" placeholder="Title" />
-    
-                        <i className="fas fa-star fa-lg" id="favoriteIcon" onClick={this.changeFavoriteColor}></i>
-    
+                        
                     </form>
 
-                    <button className="btn btn-block my-4" id="createList" type="submit" onClick={this.handleClick} disabled={!this.state.listTitle} style={{backgroundColor: "#B33434"}}>Create List</button>
+                    <div className="createListText">
+                        <p id="pinText"> Pin your list: </p><i className="fas fa-map-pin fa-lg" id="favoriteIcon" onClick={this.changeFavoriteColor}></i>
+                        <button className="btn btn-block my-4" id="createList" type="submit" onClick={this.handleClick} disabled={!this.state.listTitle} style={{backgroundColor: "#B33434"}}>Create List</button>
+                    </div>
+
                 </div>
             );
         } else if (this.state.titleSubmitted === true) {

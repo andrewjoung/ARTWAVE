@@ -7,10 +7,20 @@ const styles = {
 
 export default function Results(props) {
 
-  return (
-    <div className="searchItemDiv">
-      <img className="resultImage" onClick={()=>props.click(props.id)} id={props.id} src={props.image}></img>
-      <p className="searchItemTitle" style={styles}>{props.title}</p>
-    </div>
-  )
+  if(props.className === "musicMediaItem") {
+    return (
+      <div className="searchItemDiv">
+        <img className="musicResultImage" onClick={()=>props.click(props.id)} id={props.id} src={props.image}></img>
+        <p className="searchItemTitle" style={styles}>{props.title}</p>
+      </div>
+    )
+  } else {
+    return (
+      <div className="searchItemDiv">
+        <img className="resultImage" onClick={()=>props.click(props.id)} id={props.id} src={props.image}></img>
+        <p className="searchItemTitle" style={styles}>{props.title}</p>
+      </div>
+    )
+  }
+
 }

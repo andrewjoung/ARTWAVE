@@ -4,12 +4,18 @@
     box-shadow: 5px 5px 10px black;
 }
 
+.musicResultImage {
+    width: 17vw;
+    height: 17vw;
+    box-shadow: 5px 5px 10px black;
+}
+
 .searchItemDiv {
     padding: 5px;
 }
 
 .searchItemTitle {
-    font-size: 10px;
+    font-size: 8px;
     text-align: left;
     font-weight: bold;
     margin-top: 5px;

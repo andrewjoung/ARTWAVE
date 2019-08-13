@@ -11,14 +11,15 @@
 }
 
 .form {
-    height: 150px;
+    height: 200px;
 }
 
 .searchResultDiv {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-content: flex-start;
+    align-items: vertical;
+    margin-bottom: 60px;
 }
 
 .enterMedia {
@@ -27,8 +28,17 @@
 
 #backToMain {
     float:right;
+    margin-bottom: 50px;
 }
 
 #backText:hover {
     color: #e54242;
+}
+
+.musicMediaItem {
+    height: 17vw;
+}
+
+hr {
+    background-color:#6a6a6a !important;
 }

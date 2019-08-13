@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from "./Components/Header";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, HashRouter, Switch } from "react-router-dom";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import CreateList from "./Components/CreateList"
@@ -13,21 +13,22 @@ import ViewFriend from './Components/ViewFriend'
 import AllLists from './Components/AllLists'
 function App() {
   return (
-    <Router>
-      <div>
-        <Route exact path="/" component={Login}/>
-        <Route exact path="/login" component={Login}/>
-        <Route exact path="/register" component={Register}/>
+    <HashRouter>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Route exact path="/main" component={Header} />
         <Route exact path="/create-list" component={CreateList} />
-        <Route exact path="/search" component={Search}/>
-        <Route exact path="/friends" component={Friends}/>
-        <Route exact path="/findFriends" component={FindFriends}/>
-        <Route path ="/list/:category/:id" component={List}/>
-        <Route path = '/showlists/:category' component={AllLists}/>
-        <Route path = '/friends/:id' component={ViewFriend}/>
-      </div>
-    </Router>
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/friends" component={Friends} />
+        <Route exact path="/findFriends" component={FindFriends} />
+        <Route path="/list/:category/:id" component={List} />
+        <Route path='/showlists/:category' component={AllLists} />
+        <Route path='/friends/:id' component={ViewFriend} />
+      </Switch>
+
+    </HashRouter>
   );
 }
 

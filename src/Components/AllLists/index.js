@@ -27,7 +27,6 @@ class AllLists extends React.Component {
     api.getLists(searchO).then(data => {
       
       for(var i = 0; i < data.data.lists.length; i++){
-        console.log(data.data.lists[i])
         if(data.data.lists[i].category === this.state.page){
           
           listarray.push(data.data.lists[i])
@@ -70,8 +69,8 @@ class AllLists extends React.Component {
     return (
       <div>
         <h1>working</h1>
-        {this.state.lists.map(item => (
-          <ListCard onClick={this.cardClick} category={item.category} listId={item._id} listItem={item} />
+        {this.state.lists.map((item, index) => (
+          <ListCard  id={`listCard${index+1}`} onClick={this.cardClick} category={item.category} listId={item._id} listItem={item} />
         ))}
       </div>
     )

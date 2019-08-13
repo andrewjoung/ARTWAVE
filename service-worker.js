@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/andrewjoung/ARTWAVE/precache-manifest.68927c7c5daf65e7444917cd46dd2bd1.js"
+  "/andrewjoung/ARTWAVE/precache-manifest.f691a6f486a338dbc226e1f69b345f1b.js"
 );
 
 self.addEventListener('message', (event) => {

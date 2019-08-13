@@ -1,10 +1,12 @@
-h1 {
+#logoName {
     text-align: center;
     font-weight: 400;
+    margin-left:0;
+    margin-top: 25vh;
 }
 
 #art {
-    color: maroon;
+    color: #b21e1e;
 }
 
 #wave {
@@ -23,7 +25,27 @@ h1 {
 
 .btn {
     margin: 10px;
-    background-color: maroon;
+    background-color: #b21e1e;
     color: white;
     font-weight: 400;
+}
+
+#loginContainer {
+    padding-left: 20vw;
+    padding-right: 20vw;
+    overflow-y: hidden;
+}
+
+#noAccount {
+    display: inline;
+}
+
+#registerAcct {
+    display: inline;
+    color: #b21e1e;
+}
+
+#login {
+    margin-top: 35px;
+    margin-bottom: 20px;
 }

@@ -4,6 +4,9 @@ import { thisTypeAnnotation } from "@babel/types";
 import Music from "../SearchM"
 
 import axios from 'axios'
+
+import "./style.css";
+
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify({
   id: 'b5d5612d07684ecdacbfd220fb70b4c9',
@@ -154,8 +157,8 @@ class Form extends Component {
     if (this.state.media === 'music') {
 
       return (
-        <div>
-          <p>
+        <div className="mediaContainer">
+          <p className="enterMedia">
             Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
           </p>
           <form className="form">
@@ -180,27 +183,33 @@ class Form extends Component {
               name="title"
               onChange={this.handleInputChange}
               type="text"
-              placeholder="Testing"
+              placeholder="Search Term"
+              className="form-control mb-4"
             />
-            <select name="musicType" value={this.state.musicType} onChange={this.handleInputChange} id="make-select" className='browser-default'>
+            <select name="musicType" value={this.state.musicType} onChange={this.handleInputChange} id="make-select" className="custom-select custom-select-sm">
               <option >Select Song or Album</option>
               <option value="song" >Song</option>
               <option value="album">Album</option>
             </select>
-
-            <button onClick={this.handleFormSubmit}>Submit</button>
+            <button onClick={this.handleFormSubmit} className="btn btn-block my-4" id="mediaSearchButton">Search</button>
           </form>
-          {this.state.array.map(media => (
-            <Results click={this.click} key={media.id} image={media.image} id={media.id} />
-          ))}
+
+          <div className="searchResultDiv">
+            {this.state.array.map(media => (
+              <Results className="musicMediaItem" click={this.click} key={media.id} image={media.image} id={media.id} title={media.name}/>
+            ))}
+          </div>
+            
+          <hr />
+          <a href = '/main' id="backToMain"><p id="backText">Go back to main page</p></a>
 
         </div>
       );
     } else {
       console.log("Scotts stuff", this.state);
       return (
-        <div>
-          <p>
+        <div className="mediaContainer">
+          <p className="enterMedia">
             Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
           </p>
           <form className="form">
@@ -220,15 +229,21 @@ class Form extends Component {
               name="title"
               onChange={this.handleInputChange}
               type="text"
-              placeholder="Media"
+              placeholder="Search Term"
+              className="form-control mb-4"
             />
 
-            <button onClick={this.handleFormSubmit}>Submit</button>
+            <button onClick={this.handleFormSubmit} className="btn btn-block my-4" id="mediaSearchButton">Search</button>
           </form>
-          {this.state.array.map(media => (
-            <Results click={this.click} key={media.id} image={media.image} id={media.id} />
-          ))}
-          <a href = '/main'> <button className = "btn btn-primary">Send me back baby</button> </a>
+
+          <div className="searchResultDiv">
+            {this.state.array.map(media => (
+              <Results click={this.click} key={media.id} image={media.image} id={media.id} title={media.name}/>
+            ))}
+          </div>
+
+          <hr />
+          <a href = '/main' id="backToMain"><p id="backText">Go back to main page</p></a>
 
         </div>
       )

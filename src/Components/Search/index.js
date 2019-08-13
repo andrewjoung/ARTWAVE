@@ -201,7 +201,7 @@ class Form extends Component {
           </div>
             
           <hr />
-          <a href = '/main' id="backToMain"><p id="backText">Go back to main page</p></a>
+          <a href = '/ARTWAVE/#/main' id="backToMain"><p id="backText">Go back to main page</p></a>
 
         </div>
       );

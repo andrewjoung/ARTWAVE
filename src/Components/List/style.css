@@ -1,0 +1,50 @@
+.underItemRule {
+    background-color: rgba(255, 255, 255, 0.178);
+    margin-top: 0px;
+    width: 92%;
+}
+
+.underCommentRule {
+    background-color: rgba(255, 255, 255, 0.178);
+}
+
+.comments {
+    text-align: left;
+}
+
+.commentRow {
+    display: flex;
+    justify-content: center;
+}
+
+.addCommentRow {
+    display: flex;
+    justify-content: center;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    background-color: #B33434;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    border: solid 2pt white;
+    padding: 10px;
+    text-align: justify;
+}
+
+.addCommentBtn {
+    width: 35%;
+    margin-right: 0px;
+    border-radius: 5px;
+    /* position: absolute;
+    right: 0px; */
+    float: right;
+
+}
+
+#addCommentCol {
+    position: relative;
+}

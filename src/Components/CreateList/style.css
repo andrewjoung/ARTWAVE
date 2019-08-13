@@ -15,8 +15,32 @@
     margin: 5px;
 }
 
-.container {
+.createListContainer {
+    padding-left:30vw;
+    padding-right:30vw;
     color: white;
+    overflow-y:hidden;
+}
+
+#listTitle {
+    width: 100%;
+}
+
+#favoriteIcon, #pinText {
+    display: inline;
+}
+
+#pinText {
+    margin-left: 20px;
+    margin-right: 18px;
+}
+
+#promptText {
+    margin-top: 25vh;
+}
+
+.createListText {
+    float: right;
 }
 /* .imageOption {
     background-image:url("../../images/texture1.jpg");

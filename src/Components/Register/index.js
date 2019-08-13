@@ -52,7 +52,7 @@ class Register extends Component {
         if (!this.state.registerSuccesful) {
             return (
                 <div>
-                    <h1><span id="art">ART</span><span id="wave">WAVE</span></h1>
+                    <h1 class="logoName"><span id="art">ART</span><span id="wave">WAVE</span></h1>
                     <p>Register for a new account</p>
                     <form className="text-center">
                         <div id="inputBox">

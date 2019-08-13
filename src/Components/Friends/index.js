@@ -25,6 +25,7 @@ class Friends extends Component {
 
     componentDidMount = () => {
         API.getUserFriends(this.state.id).then(res => {
+            
             console.log(res.data);
             if (res.data.friends.length) {
                 this.setState({
@@ -67,11 +68,11 @@ class Friends extends Component {
             );
         } 
         else if(this.state.viewFriend===true){
-            console.log(this.state.clickFriend)
+            console.log(this.state.clickFriend.username)
             return(
                 
                 <Redirect push to={{
-                    pathname : `/friends/${this.state.clickFriend}`
+                    pathname : `/friends/${this.state.clickFriend.username}`
                 }}/>
             // <ViewFriend user={this.state.clickFriend}/>
             )

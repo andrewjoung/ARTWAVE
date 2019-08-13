@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/ARTWAVE/static/css/main.a97fd30c.chunk.css",
+    "main.css": "/ARTWAVE/static/css/main.88347e74.chunk.css",
     "main.js": "/ARTWAVE/static/js/main.7de44a65.chunk.js",
     "main.js.map": "/ARTWAVE/static/js/main.7de44a65.chunk.js.map",
     "runtime~main.js": "/ARTWAVE/static/js/runtime~main.0d8625f4.js",
@@ -8,9 +8,9 @@
     "static/js/2.124e4c50.chunk.js": "/ARTWAVE/static/js/2.124e4c50.chunk.js",
     "static/js/2.124e4c50.chunk.js.map": "/ARTWAVE/static/js/2.124e4c50.chunk.js.map",
     "index.html": "/ARTWAVE/index.html",
-    "precache-manifest.1a579e08079397b4f56c5cb5ba650668.js": "/ARTWAVE/precache-manifest.1a579e08079397b4f56c5cb5ba650668.js",
+    "precache-manifest.4bc3bed0a23282f4701027dd586d9707.js": "/ARTWAVE/precache-manifest.4bc3bed0a23282f4701027dd586d9707.js",
     "service-worker.js": "/ARTWAVE/service-worker.js",
-    "static/css/main.a97fd30c.chunk.css.map": "/ARTWAVE/static/css/main.a97fd30c.chunk.css.map",
+    "static/css/main.88347e74.chunk.css.map": "/ARTWAVE/static/css/main.88347e74.chunk.css.map",
     "static/media/style.css": "/ARTWAVE/static/media/texture9.9db85107.jpg"
   }
 }

@@ -3,6 +3,7 @@ import "./style.css";
 import API from "../../API/api.js";
 import ListDisplay from "../ListDisplay";
 import ListItem from "../ListItem";
+import Share from "../Share";
 
 
 class List extends Component {
@@ -91,7 +92,8 @@ class List extends Component {
                             </span>
                         </h1>
                         {/* make a form here when sharing with friend */}
-                        <button id="shareListBtn" className="btn">Share This List</button>
+                        {/* <button id="shareListBtn" className="btn">Share This List</button> */}
+                        <Share id={this.state.id}/>
                         <hr/>
 
                         {this.state.listData.items.map(itemId => (

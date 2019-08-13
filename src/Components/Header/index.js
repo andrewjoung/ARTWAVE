@@ -33,6 +33,7 @@ class Header extends Component {
     componentDidMount = () => {
         this.setState({ page: "cinema", loginInfo: JSON.parse(localStorage.getItem('loginInfo')) });
         this.apiCall();
+        console.log(JSON.parse(localStorage.getItem('loginInfo')))
         
     }
 
@@ -135,7 +136,7 @@ class Header extends Component {
     // This function now lives in the List component
     // sendComment = (id) => {
     //     console.log(id)
-    //     Axios.post(`http://localhost:8080/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
+    //     Axios.post(`https://artwave-api.herokuapp.com/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
     //         console.log(data)
     //     })
     // }
@@ -191,7 +192,7 @@ class Header extends Component {
 
                 <div className="tab-content" id="myTabContent">
                     <MainBody page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents} />
-                    <Recommended />
+                    <Recommended page={this.state.page} cardClick={this.cardClick}/>
                 </div>
             </div>
         );

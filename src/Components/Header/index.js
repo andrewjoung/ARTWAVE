@@ -158,10 +158,10 @@ class Header extends Component {
                 <div id="userInformation" className="row">
                     <div
                         className="userAvatar"
-                        // style={{
-                        //     backgroundImage: "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/leonardo-dicaprio-at-the-beverly-wilshire-hotel-in-beverly-news-photo-98152663-1540332414.jpg)",
-                        //     border: "solid 1px #B33434"
-                        // }}
+                        style={{
+                            backgroundImage: "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/leonardo-dicaprio-at-the-beverly-wilshire-hotel-in-beverly-news-photo-98152663-1540332414.jpg)",
+                            border: "solid 1px #B33434"
+                        }}
                     />
                     <div className="col userName">
                         <h3 id="hello">Hello, </h3>

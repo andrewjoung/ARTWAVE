@@ -59,8 +59,9 @@ class Share extends Component {
             <div>
                 {/* TODO: Make this a datalist of current friends */}
                 {/* <button type="button" className="btn btn-primary">Recommend to friend</button> */}
+                <hr/>
                 <div id="shareList">
-                    <h4>Share This List With a Friend</h4>
+                    <h4 style={{color: "white"}}>Share This List With a Friend</h4>
                     {/* onChange only fires when clicking the space next to the text in the dropdown, not the text itself */}
                     <Dropdown
                         onChange={this.changeSelection}

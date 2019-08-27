@@ -45,17 +45,18 @@ class Login extends Component {
     render() {
         if (!this.state.loggedIn) {
             return (
-                <div>
-                    <h1><span id="art">ART</span><span id="wave">WAVE</span></h1>
+                <div id="loginContainer">
+                    <h1 id="logoName"><span id="art">ART</span><span id="wave">WAVE</span></h1>
                     <form className="text-center">
                         <div id="inputBox">
                             <input value={this.state.username} className="form-control my-5" name="username" placeholder="Username" onChange={this.handleInputChange}/>
                             <input value={this.state.password} className="form-control" name="password" type="password" placeholder="Password" onChange={this.handleInputChange}/>
                         </div>
                         <button className="btn btn-sm" id="login" type="submit" onClick={this.handleFormSubmit}>Login</button>
-                        <Link to="/register">
-                            <button type="button" className="btn btn-sm" id="createAcct">Create Account</button>
-                        </Link>
+                        
+                        <div id="registerText">
+                            <p id="noAccount">Don't have an account? Register </p><Link to="/register" id="registerAcct"> here </Link>
+                        </div>
                     </form>
                 </div>
             );

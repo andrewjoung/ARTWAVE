@@ -83,13 +83,13 @@ class List extends Component {
                         {/* <p>This is a {this.state.category} list with id {this.state.id}</p>
                         <hr/> */}
 
-                        <h1>
+                        <h1 style={{color: "white"}}>
                             {this.state.listData.title}
-                            <span>                            
+                            {/* <span>                            
                                 <h3>
                                     by {JSON.parse(localStorage.getItem("loginInfo")).firstName}
                                 </h3>
-                            </span>
+                            </span> */}
                         </h1>
                         {/* make a form here when sharing with friend */}
                         {/* <button id="shareListBtn" className="btn">Share This List</button> */}

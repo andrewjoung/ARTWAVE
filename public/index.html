@@ -32,6 +32,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/js/mdb.min.js"></script>
+    <!-- Cloudinary -->
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>  
 
     <title>React App</title>
   </head>
@@ -48,6 +50,21 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script type="text/javascript">  
+      var myWidget = cloudinary.createUploadWidget({
+        cloudName: 'dvi7y8bvb', 
+        uploadPreset: 'aauqtyy6'}, (error, result) => { 
+          if (!error && result && result.event === "success") { 
+            console.log('Done! Here is the image info: ', result.info); 
+          }
+        }
+      )
+      
+      document.getElementById("addPhoto").addEventListener("click", function(){
+          myWidget.open();
+        }, false);
+      </script>
 
   </body>
 </html>

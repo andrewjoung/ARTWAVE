@@ -49,5 +49,8 @@ export default {
     },
     populateRecommended: (userId) => {
         return axios.get("http://localhost:8080/recommended/data/" + userId);
+    },
+    addUserPhoto: (photoData) => {
+        return axios.put("http://localhost:8080/updatePhoto", photoData);
     }
 };

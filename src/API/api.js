@@ -3,51 +3,54 @@ import axios from "axios";
 
 export default {
     registerUser: (newUser) => {
-        return axios.post("https://artwave-api.herokuapp.com/register", newUser);
+        return axios.post("http://localhost:8080/register", newUser);
     },
     loginUser: (loginInfo) => {
-        return axios.post("https://artwave-api.herokuapp.com/login", loginInfo);
+        return axios.post("http://localhost:8080/login", loginInfo);
     },
     createList: (listData) => {
-        return axios.post("https://artwave-api.herokuapp.com/create-list/", listData);
+        return axios.post("http://localhost:8080/create-list/", listData);
     },
     getLists: (searchObject) => {
-        return axios.get("https://artwave-api.herokuapp.com/user/" + searchObject.username);   
+        return axios.get("http://localhost:8080/user/" + searchObject.username);   
     },
     getFriends: (id) => {
-        return axios.get("https://artwave-api.herokuapp.com/users/" + id);
+        return axios.get("http://localhost:8080/users/" + id);
     },
     addFriend: (addFriendData) => {
-        return axios.put("https://artwave-api.herokuapp.com/addFriend", addFriendData);
+        return axios.put("http://localhost:8080/addFriend", addFriendData);
     },
     getUserFriends: (id) => {
-        return axios.get("https://artwave-api.herokuapp.com/getFriends/" + id);
+        return axios.get("http://localhost:8080/getFriends/" + id);
     },
     getListData: (listId, category) => {
-        return axios.get("https://artwave-api.herokuapp.com/list/" + category + "/" + listId);
+        return axios.get("http://localhost:8080/list/" + category + "/" + listId);
     },
     createComment: (commentData) => {
-        return axios.post("https://artwave-api.herokuapp.com/commentSubmit", commentData);
+        return axios.post("http://localhost:8080/commentSubmit", commentData);
     },
     addCommentToList: (updateData) => {
-        return axios.put("https://artwave-api.herokuapp.com/list/add_comment", updateData);
+        return axios.put("http://localhost:8080/list/add_comment", updateData);
     },
     getMovieItem: (movieId) => {
-        return axios.get("https://artwave-api.herokuapp.com/movie/" + movieId);
+        return axios.get("http://localhost:8080/movie/" + movieId);
     },
     getMusicItem: (musicId) => {
-        return axios.get("https://artwave-api.herokuapp.com/music/" + musicId);
+        return axios.get("http://localhost:8080/music/" + musicId);
     },
     getBookItem: (bookId) => {
-        return axios.get("https://artwave-api.herokuapp.com/book/" + bookId);
+        return axios.get("http://localhost:8080/book/" + bookId);
     },
     getFriendData: (userId) => {
-        return axios.get("https://artwave-api.herokuapp.com/friends/" + userId);
+        return axios.get("http://localhost:8080/friends/" + userId);
     },
     recommendList: (recData) => {
-        return axios.post("https://artwave-api.herokuapp.com/recommend", recData);
+        return axios.post("http://localhost:8080/recommend", recData);
     },
     populateRecommended: (userId) => {
-        return axios.get("https://artwave-api.herokuapp.com/recommended/data/" + userId);
+        return axios.get("http://localhost:8080/recommended/data/" + userId);
+    },
+    addUserPhoto: (photoData) => {
+        return axios.put("http://localhost:8080/updatePhoto", photoData);
     }
 };

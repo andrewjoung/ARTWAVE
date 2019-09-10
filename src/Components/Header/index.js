@@ -26,12 +26,17 @@ class Header extends Component {
         renderList: false,
         // textarea: '',
         cardClickId: '',
-        currentComments: []
+        currentComments: [],
+        profileImageUrl: ""
     }
 
     //
     componentDidMount = () => {
-        this.setState({ page: "cinema", loginInfo: JSON.parse(localStorage.getItem('loginInfo')) });
+        this.setState({
+            page: "cinema",
+            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+
+        });
         this.apiCall();
         console.log(JSON.parse(localStorage.getItem('loginInfo')))
         
@@ -50,7 +55,7 @@ class Header extends Component {
     cardClick = (id, category) => {
         
         // TODO: Refactor this to use the 'getListData' axios call in API - redundant routes on the backend
-        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+        Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
             console.log(data)
             this.setState({
                 recievedData: data.data,
@@ -125,23 +130,58 @@ class Header extends Component {
         });
     }
 
-    // This function now lives in the List component
-    // handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // }
+    //
+    uploadProfilePhoto = photoUpload => {
+        photoUpload.open();
+    }
 
-    // This function now lives in the List component
-    // sendComment = (id) => {
-    //     console.log(id)
-    //     Axios.post(`http://localhost:8080/commentSubmit`, { id: this.state.loginInfo, comment: this.state.textarea, listId: this.state.cardClickId }).then(data => {
-    //         console.log(data)
-    //     })
-    // }
+    //
+    changeProfilePicture = photoUpload => {
+        if (this.state.loginInfo.profileImageUrl) {
+            photoUpload.open();
+        }
+    }
+
+    //
+    checkUploadResult = (error, resultObject) => {
+        if (!error && resultObject && resultObject.event === "success") {
+            console.log('Done! Here is the image info: ', resultObject.info);
+
+            // Set the new profile photo in localstorage
+            // let newLoginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+            let newLoginInfo = this.state.loginInfo;
+            newLoginInfo.profileImageUrl = resultObject.info.secure_url;
+            localStorage.setItem("loginInfo", JSON.stringify(newLoginInfo));
+
+            // Update the profile photo in the database
+            const photoData = {
+                userId: this.state.loginInfo.id,
+                profileImageUrl: resultObject.info.secure_url
+            }
+            api.addUserPhoto(photoData).then(data => {
+                console.log(data);
+            }).catch(err => {
+                console.log(err.response);
+            });
+
+            this.setState({
+                profileImageUrl: resultObject.info.secure_url
+            });
+        }
+    }
     
     render() {
+
+        let photoUpload = window.cloudinary.createUploadWidget(
+            {
+                cloudName: 'dvi7y8bvb',
+                uploadPreset: 'aauqtyy6'
+            },
+            (error, result) => {this.checkUploadResult(error, result)}
+        );
+
+        let displayAddPhoto = this.state.loginInfo.profileImageUrl ? "none" : "block";
+
         // Group of ListDisplays based on which type of list was clicked, each passes in same props
         if (this.state.renderList === true) {
             return (
@@ -156,13 +196,17 @@ class Header extends Component {
         return (
             <div>
                 <div id="userInformation" className="row">
+
+
                     <div
                         className="userAvatar"
-                        style={{
-                            backgroundImage: "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/leonardo-dicaprio-at-the-beverly-wilshire-hotel-in-beverly-news-photo-98152663-1540332414.jpg)",
-                            border: "solid 1px #B33434"
-                        }}
-                    />
+                        onClick={() => this.changeProfilePicture(photoUpload)}
+                        style={{backgroundImage: "url(" + this.state.loginInfo.profileImageUrl + ")"}}
+                    >
+                        <i id="addPhoto" title="Add Profile Photo" class="fas fa-plus" onClick={() => this.uploadProfilePhoto(photoUpload)} style={{display: displayAddPhoto}}></i>
+                    </div>
+
+
                     <div className="col userName">
                         <h3 id="hello">Hello, </h3>
                         <h1 id="name">{this.state.loginInfo.firstName}</h1>

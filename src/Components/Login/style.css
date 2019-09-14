@@ -49,3 +49,15 @@
     margin-top: 35px;
     margin-bottom: 20px;
 }
+
+.displayError {
+    display: block;
+    color: #b21e1e;
+    margin-bottom: 0px;
+}
+
+.noDisplay {
+    display: none;
+    color: #b21e1e;
+    margin-bottom: 0px;
+}

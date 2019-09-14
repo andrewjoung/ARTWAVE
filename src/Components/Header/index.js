@@ -1,21 +1,26 @@
 import React, { Component } from "react";
-import "./style.css";
+import { Link, Redirect } from "react-router-dom";
+
+import api from '../../API/api';
+import Axios from "axios";
+
+// Components
 import MainBody from "../MainBody";
 import ListCard from "../ListCard";
-import api from '../../API/api';
-import { Link, Redirect } from "react-router-dom";
-import Axios from "axios";
 import Recommended from "../Recommended";
+
+// CSS
+import "./style.css";
 // import ListDisplay from '../ListDisplay'
 // import List from "../List";
 
-const style = {
-    color: 'white'
-}
+// const style = {
+//     color: 'white'
+// }
 
-const style2 = {
-    width: '100%'
-}
+// const style2 = {
+//     width: '100%'
+// }
 
 class Header extends Component {
     state = {
@@ -38,7 +43,7 @@ class Header extends Component {
 
         });
         this.apiCall();
-        console.log(JSON.parse(localStorage.getItem('loginInfo')))
+        // console.log(JSON.parse(localStorage.getItem('loginInfo')))
         
     }
 
@@ -55,7 +60,7 @@ class Header extends Component {
     cardClick = (id, category) => {
         
         // TODO: Refactor this to use the 'getListData' axios call in API - redundant routes on the backend
-        Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
+        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
             console.log(data)
             this.setState({
                 recievedData: data.data,
@@ -70,7 +75,7 @@ class Header extends Component {
     
     //
     apiCall = () => {
-        console.log("in api call this is state that is passed in", this.state);
+        // console.log("in api call this is state that is passed in", this.state);
         
         let listSearchObject = {
             category: this.state.page,
@@ -104,7 +109,7 @@ class Header extends Component {
                         console.log(list.category);
                         count++;
                         let id = "listCard" + count;
-                        return <ListCard id={id} onClick={this.cardClick} category={list.category} listId={list._id} listItem={list} />;
+                        return <ListCard key={id} id={id} onClick={this.cardClick} category={list.category} listId={list._id} listItem={list} />;
                         
                     });
                     this.setState({ cardComponents: card });
@@ -203,7 +208,7 @@ class Header extends Component {
                         onClick={() => this.changeProfilePicture(photoUpload)}
                         style={{backgroundImage: "url(" + this.state.loginInfo.profileImageUrl + ")"}}
                     >
-                        <i id="addPhoto" title="Add Profile Photo" class="fas fa-plus" onClick={() => this.uploadProfilePhoto(photoUpload)} style={{display: displayAddPhoto}}></i>
+                        <i id="addPhoto" title="Add Profile Photo" className="fas fa-plus" onClick={() => this.uploadProfilePhoto(photoUpload)} style={{display: displayAddPhoto}}></i>
                     </div>
 
 
@@ -221,13 +226,13 @@ class Header extends Component {
 
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item" onClick={this.handleClick}>
-                        <a className="nav-link active" id="cinema-tab" data-toggle="tab" name="cinema" role="tab">Cinema</a>
+                        <button className="nav-link active" id="cinema-tab" data-toggle="tab" name="cinema" role="tab">Cinema</button>
                     </li>
                     <li className="nav-item" onClick={this.handleClick}>
-                        <a className="nav-link" id="profile-tab" data-toggle="tab" name="literature" role="tab">Literature</a>
+                        <button className="nav-link" id="profile-tab" data-toggle="tab" name="literature" role="tab">Literature</button>
                     </li>
                     <li className="nav-item" onClick={this.handleClick}>
-                        <a className="nav-link" id="contact-tab" data-toggle="tab" name="music" role="tab">Music</a>
+                        <button className="nav-link" id="contact-tab" data-toggle="tab" name="music" role="tab">Music</button>
                     </li>
                     {/* <li className="nav-item" onClick={this.handleClick}>
                         <a className="nav-link" id="friend-tab" data-toggle="tab" name="friends" role="tab">Friends</a>

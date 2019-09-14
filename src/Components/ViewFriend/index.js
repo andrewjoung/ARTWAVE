@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import MainBody from "../MainBody";
 import ListCard from "../ListCard";
 import api from '../../API/api';
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Axios from "axios";
 import Recommended from "../Recommended";
 
-class ViewFriend extends React.Component {
+class ViewFriend extends Component {
   
 
   state = {
@@ -129,13 +129,13 @@ class ViewFriend extends React.Component {
 
         <ul className="nav nav-tabs" id="myTab" role="tablist">
           <li className="nav-item" onClick={this.handleClick}>
-            <a className="nav-link active" id="cinema-tab" data-toggle="tab" name="cinema" role="tab">Cinema</a>
+            <button className="nav-link active" id="cinema-tab" data-toggle="tab" name="cinema" role="tab">Cinema</button>
           </li>
           <li className="nav-item" onClick={this.handleClick}>
-            <a className="nav-link" id="profile-tab" data-toggle="tab" name="literature" role="tab">Literature</a>
+            <button className="nav-link" id="profile-tab" data-toggle="tab" name="literature" role="tab">Literature</button>
           </li>
           <li className="nav-item" onClick={this.handleClick}>
-            <a className="nav-link" id="contact-tab" data-toggle="tab" name="music" role="tab">Music</a>
+            <button className="nav-link" id="contact-tab" data-toggle="tab" name="music" role="tab">Music</button>
           </li>
         </ul>
 

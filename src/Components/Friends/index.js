@@ -57,7 +57,7 @@ class Friends extends Component {
                     <div className="container" id="friendContainer">
                         {this.state.friends.map(friend => {
                             return (
-                                <div onClick ={()=>this.clickHandle(friend.username)} className="friendBox">
+                                <div key={friend.username} onClick ={()=>this.clickHandle(friend.username)} className="friendBox">
                                     <div className="userAvatar"></div>
                                     <p>{friend.firstName} {friend.lastName}</p>
                                 </div>

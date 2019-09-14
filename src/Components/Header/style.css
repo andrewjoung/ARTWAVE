@@ -89,3 +89,12 @@ body, .nav-tabs .nav-link.active {
 #addPhoto:hover {
     color: #e54242;
 }
+
+#friendButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #373737;
+    padding-bottom: 20px;
+    /* margin: 25px; */
+}

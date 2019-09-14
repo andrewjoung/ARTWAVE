@@ -11,7 +11,8 @@ class Register extends Component {
         email: "",
         password: "",
         passwordConfirm: "",
-        errors: {},
+        errors: [],
+        displayError: false,
         registerSuccesful: false
     };
 
@@ -42,8 +43,20 @@ class Register extends Component {
                 });
             }
             console.log(res);
-        }).catch(function(err) {
-            console.log(err);
+        }).catch(err => {
+            const currErrors = [];
+            const errKeys = Object.keys(err.response.data);
+
+            for (let key of errKeys) {
+                currErrors.push({
+                    [key]: err.response.data[key]
+                });
+            }
+
+            this.setState({
+                displayError: true,
+                errors: currErrors
+            });
         });
     }    
     
@@ -52,17 +65,23 @@ class Register extends Component {
         if (!this.state.registerSuccesful) {
             return (
                 <div>
-                    <h1 class="logoName"><span id="art">ART</span><span id="wave">WAVE</span></h1>
+                    <h1 className="logoName"><span id="art">ART</span><span id="wave">WAVE</span></h1>
                     <p>Register for a new account</p>
                     <form className="text-center">
+
+                        {this.state.errors.map((errorObj, index) => {
+                            return <p key={index} className={this.state.displayError ? "displayError" : "noDisplay"}>{errorObj[Object.keys(errorObj)[0]]}</p>
+                        })}
+
                         <div id="inputBox">
-                            <input value={this.state.firstName} className="form-control" name="firstName" type="text" placeholder="First Name" onChange={this.handleInputChange} error={errors.firstName}/>
+                            <input value={this.state.firstName} className="form-control" name="firstName" type="text" placeholder="First Name" onChange={this.handleInputChange} error={errors.firstName} required/>
                             <input value={this.state.lastName} className="form-control" name="lastName" type="text" placeholder="Last Name" onChange={this.handleInputChange} error={errors.lastName}/>
                             <input value={this.state.username} className="form-control" name="username" type="text" placeholder="Username"onChange={this.handleInputChange} error={errors.username}/>
                             <input value={this.state.email} className="form-control" name="email" type="email" placeholder="Email"onChange={this.handleInputChange} error={errors.email}/>
                             <input value={this.state.password} className="form-control" name="password" type="password" placeholder="Password"onChange={this.handleInputChange} error={errors.password}/>
                             <input value={this.state.passwordConfirm} className="form-control" name="passwordConfirm" type="password" placeholder="Confirm Password"onChange={this.handleInputChange} error={errors.password2}/>
                         </div>
+
                         <button type="submit" className="btn btn-sm" id="createAcct" onClick={this.handleFormSubmit}>Create Account</button>
                     </form>
                 </div>

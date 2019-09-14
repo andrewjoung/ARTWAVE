@@ -54,10 +54,11 @@
     display: block;
     color: #b21e1e;
     margin-bottom: 0px;
+    font-weight: 400;
 }
 
 .noDisplay {
     display: none;
-    color: #b21e1e;
-    margin-bottom: 0px;
+    /* color: #b21e1e;
+    margin-bottom: 0px; */
 }

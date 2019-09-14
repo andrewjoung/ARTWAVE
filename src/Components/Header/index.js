@@ -201,28 +201,36 @@ class Header extends Component {
         return (
             <div>
                 <div id="userInformation" className="row">
+                    {/* <div className="col-md-6"> */}
+                        <div
+                            className="userAvatar"
+                            onClick={() => this.changeProfilePicture(photoUpload)}
+                            style={{backgroundImage: "url(" + this.state.loginInfo.profileImageUrl + ")"}}
+                        >
+                            <i id="addPhoto" title="Add Profile Photo" className="fas fa-plus" onClick={() => this.uploadProfilePhoto(photoUpload)} style={{display: displayAddPhoto}}></i>
+                        </div>
 
+                        <div className="userName">
+                            <h3 id="hello">Hello, </h3>
+                            <h1 id="name">{this.state.loginInfo.firstName}</h1>
+                        </div>
+                    {/* </div> */}
 
-                    <div
-                        className="userAvatar"
-                        onClick={() => this.changeProfilePicture(photoUpload)}
-                        style={{backgroundImage: "url(" + this.state.loginInfo.profileImageUrl + ")"}}
-                    >
-                        <i id="addPhoto" title="Add Profile Photo" className="fas fa-plus" onClick={() => this.uploadProfilePhoto(photoUpload)} style={{display: displayAddPhoto}}></i>
-                    </div>
+                    {/* <div className="col-md-3">
+                    </div> */}
 
-
-                    <div className="col userName">
-                        <h3 id="hello">Hello, </h3>
-                        <h1 id="name">{this.state.loginInfo.firstName}</h1>
-                    </div>
-                    <Link to="/findFriends">
-                        <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>Find Friends</button>
-                    </Link>
-                    <Link to="/friends">
-                        <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>View Friends</button>
-                    </Link>
+                    {/* <div className="col-md-6"></div> */}
                 </div>
+
+                    <div id="friendButtons">
+                        <Link to="/findFriends">
+                            <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>Find Friends</button>
+                        </Link>
+                        <Link to="/friends">
+                            <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>View Friends</button>
+                        </Link>
+                    </div>
+
 
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item" onClick={this.handleClick}>

@@ -25,14 +25,16 @@
 textarea {
     width: 100%;
     height: 150px;
-    border-radius: 10px;
-    background-color: #B33434;
-    color: white;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    border: solid 2pt white;
+    border-radius: 5px;
+    /* background-color: #121111; */
+    /* color: white; */
+    /* font-family: Courier New,Courier,monospace; */
+    /* font-weight: 700; */
+    /* border: 2pt solid #fff; */
     padding: 10px;
     text-align: justify;
+    border: none;
+    box-shadow: 8px 8px 10px black;
 }
 
 .addCommentBtn {

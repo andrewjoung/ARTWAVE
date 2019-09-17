@@ -189,7 +189,6 @@ class Form extends Component {
           <Link to="/main">
             <button className="btn btn-md" id="backToMain">Done</button>          
           </Link>
-
         </div>
       );
     } else {

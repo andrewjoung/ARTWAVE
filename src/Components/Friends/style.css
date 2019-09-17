@@ -10,6 +10,8 @@ hr {
 h1 {
     text-align: left;
     margin-left: 15px;
+    color: white;
+    padding-top: 10px;
 }
 
 .friendBox {
@@ -31,4 +33,34 @@ header {
     position: absolute;
     right: 15px;
     top: 0px;
+}
+
+#noFriendText {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.fa-sad-tear {
+    font-size: 100px;
+    color: #e54242;
+}
+
+#iconDiv {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.navButtons {
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#findFriendDiv {
+    width: 100%;
+    text-align: center;
+}
+
+#findFriendBtn:hover ~ .fa-sad-tear {
+    display: none;
 }

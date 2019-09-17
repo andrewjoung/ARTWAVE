@@ -52,5 +52,8 @@ export default {
     },
     addUserPhoto: (photoData) => {
         return axios.put("http://localhost:8080/updatePhoto", photoData);
+    },
+    getCommentData: (commentId) => {
+        return axios.get("http://localhost:8080/commentData/" + commentId);
     }
 };

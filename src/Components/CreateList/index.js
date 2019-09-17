@@ -28,7 +28,7 @@ class CreateList extends Component {
     handleClick = event => {
         event.preventDefault();
 
-        console.log("Make API calls");
+        // console.log("Make API calls");
 
         let listData = {
             username: this.state.loginInfo.username,

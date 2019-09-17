@@ -141,7 +141,6 @@ class ViewFriend extends Component {
 
         <div className="tab-content" id="myTabContent">
           <MainBody friend={true} page={this.state.page} loginInfo={this.state.loginInfo} cards={this.state.cardComponents} />
-          <Recommended />
         </div>
       </div>
     )

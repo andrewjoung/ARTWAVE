@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from "react-router-dom";
 import "./style.css";
 import API from "../../API/api";
 
@@ -59,8 +60,11 @@ class FindFriends extends Component {
 
     render =() => {
         return (
-            <div>
-                <h2>Find Friends!</h2>
+            <div className="container">
+                <h1>Find Friends!</h1>
+                <Link to="/main">
+                    <button className="btn btn-md" id="main" style={{ backgroundColor: "#B33434" }}>Main</button>
+                </Link>
                 <hr/>
                 <h3>Available Friends:</h3>
                 <ul>
@@ -71,9 +75,9 @@ class FindFriends extends Component {
                                     {friend.firstName} {friend.lastName}
                                     <button
                                         name={friend._id}
-                                        className="btn btn-sm btn-primary"
+                                        className="btn btn-sm"
                                         onClick={this.addFriend}
-                                        style={{fontSize: ".75rem", padding: ".15rem .5rem", marginTop: "0px", marginBottom: "0px"}}>
+                                        style={{fontSize: ".75rem", padding: ".15rem .5rem", marginTop: "0px", marginBottom: "0px", backgroundColor: "#e54242"}}>
                                             ADD
                                     </button>
                                 </li>;

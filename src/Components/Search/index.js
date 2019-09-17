@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Results from '../Results'
 // import { thisTypeAnnotation } from "@babel/types";
 // import Music from "../SearchM"
+import {Link} from "react-router-dom";
 
 import axios from 'axios'
 
@@ -243,7 +244,9 @@ class Form extends Component {
           </div>
 
           <hr />
-          <a href='/main' id="backToMain"><p id="backText">Go back to main page</p></a>
+          <Link to="/main">
+            <button className="btn btn-md" id="backToMain">Done</button>          
+          </Link>
 
         </div>
       )

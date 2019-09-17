@@ -48,3 +48,8 @@ textarea {
 #addCommentCol {
     position: relative;
 }
+
+.commentUsername {
+    color: #B33434;
+    font-weight: 400;
+}

@@ -12,7 +12,8 @@ class Friends extends Component {
         friends: [],
         hasFriends: true,
         viewFriend : false,
-        clickFriend: []
+        clickFriend: [],
+        displaySad: true
     }
 
     clickHandle = (username)=>{
@@ -38,6 +39,12 @@ class Friends extends Component {
             }
         }).catch(err => {
             console.log(err);
+        });
+    }
+
+    changeEmoji = () => {
+        this.setState({
+            displaySad: false
         });
     }
     
@@ -80,7 +87,21 @@ class Friends extends Component {
         else {
             return (
                 // TODO: flesh this section out more - low priority
-                <h3>No friends to display</h3>
+                <div className="container">
+                    <h2 id="noFriendText">No friends to display</h2>
+                    <div id="iconDiv">
+                        <i className="far fa-sad-tear" style={{display: this.displaySad ? "none" : "block"}}></i>
+                    </div>
+                    <div id="findFriendDiv">
+                        <Link to="/findFriends">
+                            <button className="btn btn-md navButtons" onMouseEnter={this.changeEmoji}>Find Friends!</button>
+                        </Link>
+                        <Link to="main">
+                            <button className="btn btn-md navButtons">Back to Homepage</button>
+                        </Link>
+                    </div>
+
+                </div>
             );
         }
     }

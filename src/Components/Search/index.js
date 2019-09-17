@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Results from '../Results'
-import { thisTypeAnnotation } from "@babel/types";
-import Music from "../SearchM"
+// import { thisTypeAnnotation } from "@babel/types";
+// import Music from "../SearchM"
+import {Link} from "react-router-dom";
 
 import axios from 'axios'
 
@@ -109,7 +110,7 @@ class Form extends Component {
       // console.log('hitting here')
       axios.post('https://artwave-api.herokuapp.com/movies', { title: this.state.title }).then(data => {
         this.setState({ array: data.data })
-      }).catch(err=>{
+      }).catch(err => {
         console.log(err)
       })
 
@@ -162,22 +163,6 @@ class Form extends Component {
             Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
           </p>
           <form className="form">
-            {/* <div id="second-input-hidden" className="col-md-12 mt-4">
-              <select name="media" value={this.state.media} onChange={this.handleInputChange} id="make-select" className="browser-default custom-select">
-                <option >Select the type of media you want to search</option>
-                <option value="movies" >Movies</option>
-                <option value="music">Music</option>
-                <option value="books">Books</option>
-
-
-              </select>
-              <select name="musicType" value={this.state.musicType} onChange={this.handleInputChange} id="make-select" className='browser-default'>
-                <option >Select Song or Album</option>
-                <option value="song" >Song</option>
-                <option value="album">Album</option>
-              </select>
-
-            </div> */}
             <input
               value={this.state.title}
               name="title"
@@ -196,13 +181,14 @@ class Form extends Component {
 
           <div className="searchResultDiv">
             {this.state.array.map(media => (
-              <Results className="musicMediaItem" click={this.click} key={media.id} image={media.image} id={media.id} title={media.name}/>
+              <Results className="musicMediaItem" click={this.click} key={media.id} image={media.image} id={media.id} title={media.name} />
             ))}
           </div>
-            
-          <hr />
-          <a href = '/ARTWAVE/#/main' id="backToMain"><p id="backText">Go back to main page</p></a>
 
+          <hr />
+          <Link to="/main">
+            <button className="btn btn-md" id="backToMain">Done</button>          
+          </Link>
         </div>
       );
     } else {
@@ -213,17 +199,6 @@ class Form extends Component {
             Enter the Media you wish to search {this.state.firstName} {this.state.lastName}
           </p>
           <form className="form">
-            {/* <div id="second-input-hidden" className="col-md-12 mt-4">
-              <select name="media" value={this.state.media} onChange={this.handleInputChange} id="make-select" className="browser-default custom-select">
-                <option >Select the type of media you want to search</option>
-                <option value="movies" >Movies</option>
-                <option value="music">Music</option>
-                <option value="books">Books</option>
-
-
-              </select>
-
-            </div> */}
             <input
               value={this.state.title}
               name="title"
@@ -238,21 +213,20 @@ class Form extends Component {
 
           <div className="searchResultDiv">
             {this.state.array.map(media => (
-              <Results click={this.click} key={media.id} image={media.image} id={media.id} title={media.name}/>
+              <Results click={this.click} key={media.id} image={media.image} id={media.id} title={media.name} />
             ))}
           </div>
 
           <hr />
-          <a href = '/ARTWAVE/#/main' id="backToMain"><p id="backText">Go back to main page</p></a>
+          <Link to="/main">
+            <button className="btn btn-md" id="backToMain">Done</button>          
+          </Link>
 
         </div>
       )
     }
   }
-
 }
-
-
 
 export default Form;
 

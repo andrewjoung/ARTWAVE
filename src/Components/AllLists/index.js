@@ -68,7 +68,7 @@ class AllLists extends React.Component {
 
     return (
       <div>
-        <h1>working</h1>
+        <h1>{this.state.page} Lists</h1>
         {this.state.lists.map((item, index) => (
           <ListCard  id={`listCard${index+1}`} onClick={this.cardClick} category={item.category} listId={item._id} listItem={item} />
         ))}

@@ -49,5 +49,11 @@ export default {
     },
     populateRecommended: (userId) => {
         return axios.get("https://artwave-api.herokuapp.com/recommended/data/" + userId);
+    },
+    addUserPhoto: (photoData) => {
+        return axios.put("https://artwave-api.herokuapp.com/updatePhoto", photoData);
+    },
+    getCommentData: (commentId) => {
+        return axios.get("https://artwave-api.herokuapp.com/commentData/" + commentId);
     }
 };

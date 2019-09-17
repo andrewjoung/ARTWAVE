@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./style.css";
 import API from "../../API/api.js";
-import ListDisplay from "../ListDisplay";
+// import ListDisplay from "../ListDisplay";
 import ListItem from "../ListItem";
 import Share from "../Share";
 
@@ -10,9 +10,7 @@ class List extends Component {
     state = {
         id: this.props.match.params.id,
         category: this.props.match.params.category,
-        // listData: this.props.location.state.listData
         listData: {},
-        listItems: [],
         listComments: [],
         renderList: false,
         textarea: ""
@@ -22,14 +20,33 @@ class List extends Component {
     componentDidMount = () => {
         console.log("Attempt to get list data");
         console.log("List ID: ", this.state.id, "\n");
+
         API.getListData(this.state.id, this.state.category).then(data => {
-            console.log("\nAxios response: ", data.data, "\n")
+            console.log("\nAPI.getListData response: ", data.data, "\n")
+            // TODO: Retrieve populated comment objects here and set comments in state with associated username
+            
+            let commentsData = [];
+            for (let commObj of data.data.comments) {
+                console.log(commentsData);
+                API.getCommentData(commObj._id).then(commData => {
+                    // console.log(commData.data);                    
+                    commentsData.push({
+                        _id: commData.data._id,
+                        body: commData.data.body,
+                        user: commData.data.user,
+                        username: commData.data.username
+                    });
+                }).catch(err => {
+                    console.log(err);
+                });                
+            }
+
             this.setState({
                 listData: data.data,
-                // listItems: 
-                listComments: data.data.comments,
+                listComments: commentsData,
                 renderList: true
             });
+
         }).catch(err => {
             console.log(err);
         });
@@ -52,7 +69,7 @@ class List extends Component {
             listId: this.state.cardClickId
         }
         API.createComment(commentData).then(data => {
-            // console.log(data.data);
+            console.log(data.data);
             const updateData = {
                 listId: this.state.id,
                 commentId: data.data._id
@@ -60,16 +77,22 @@ class List extends Component {
             API.addCommentToList(updateData).then(res => {
                 console.log("\nNew comment id pushed to list comment array in db: ", res, "\n");
                 const newCommentArray = this.state.listComments;
-                newCommentArray.push(data.data);
+                newCommentArray.push({
+                    _id: res.data._id,
+                    body: res.data.body,
+                    user: res.data.user,
+                    username: res.data.username
+                });
                 this.setState({
-                    listComments: newCommentArray
+                    listComments: newCommentArray,
+                    textarea: ""
                 });
             }).catch(err => {
                 console.log(err);
             });
         }).catch(err => {
             console.log(err);
-        });    
+        });  
     }
     
     render = () => {
@@ -79,27 +102,14 @@ class List extends Component {
                     {/* Make sure everything in the bootstrap container is gridded out with rows and cols */}
                     <div className="container">
 
-                        {/* Testing purposes - will leave this until cinema and music are also working */}
-                        {/* <p>This is a {this.state.category} list with id {this.state.id}</p>
-                        <hr/> */}
-
                         <h1 style={{color: "white"}}>
                             {this.state.listData.title}
-                            {/* <span>                            
-                                <h3>
-                                    by {JSON.parse(localStorage.getItem("loginInfo")).firstName}
-                                </h3>
-                            </span> */}
                         </h1>
-                        {/* make a form here when sharing with friend */}
-                        {/* <button id="shareListBtn" className="btn">Share This List</button> */}
                         <Share id={this.state.id}/>
                         <hr/>
 
                         {this.state.listData.items.map(itemId => (
                             <div>
-                                {/* Change author/artist/director to creator/something universal */}
-                                {/* <ListDisplay comments={this.listComments} clickId={this.state.id} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author}/> */}
                                 <ListItem id={itemId} category={this.state.category}/>
                                 <hr className="underItemRule"/>
                             </div>
@@ -111,10 +121,14 @@ class List extends Component {
                      
                         {this.state.listComments.map(comment => (
                             <div className="row commentRow">
-                                <div className="col-md-11">
-                                    <p className="comments">Submitted by UserID: {comment.user}: {comment.body}</p>
+                                <div className="col-md-10">
+                                    <p className="comments"><span className="commentUsername">{comment.username}: </span>{comment.body}</p>
                                     <hr className="underCommentRule"/>
+                                </div> 
+                                <div>
+                                    {/* Ternary here to edit/delete comment IF you are the user who created it */}
                                 </div>
+
                             </div>
                         ))}
                       

@@ -102,27 +102,14 @@ class List extends Component {
                     {/* Make sure everything in the bootstrap container is gridded out with rows and cols */}
                     <div className="container">
 
-                        {/* Testing purposes - will leave this until cinema and music are also working */}
-                        {/* <p>This is a {this.state.category} list with id {this.state.id}</p>
-                        <hr/> */}
-
                         <h1 style={{color: "white"}}>
                             {this.state.listData.title}
-                            {/* <span>                            
-                                <h3>
-                                    by {JSON.parse(localStorage.getItem("loginInfo")).firstName}
-                                </h3>
-                            </span> */}
                         </h1>
-                        {/* make a form here when sharing with friend */}
-                        {/* <button id="shareListBtn" className="btn">Share This List</button> */}
                         <Share id={this.state.id}/>
                         <hr/>
 
                         {this.state.listData.items.map(itemId => (
                             <div>
-                                {/* Change author/artist/director to creator/something universal */}
-                                {/* <ListDisplay comments={this.listComments} clickId={this.state.id} synopsis={item.synopsis} id={item._id} name={item.title} image={item.artUri} author={item.author}/> */}
                                 <ListItem id={itemId} category={this.state.category}/>
                                 <hr className="underItemRule"/>
                             </div>

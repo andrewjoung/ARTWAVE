@@ -4,7 +4,6 @@ import ListCard from "../ListCard";
 import api from '../../API/api';
 import { Redirect } from "react-router-dom";
 import Axios from "axios";
-import Recommended from "../Recommended";
 
 class ViewFriend extends Component {
   

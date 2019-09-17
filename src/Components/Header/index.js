@@ -11,16 +11,6 @@ import Recommended from "../Recommended";
 
 // CSS
 import "./style.css";
-// import ListDisplay from '../ListDisplay'
-// import List from "../List";
-
-// const style = {
-//     color: 'white'
-// }
-
-// const style2 = {
-//     width: '100%'
-// }
 
 class Header extends Component {
     state = {
@@ -29,7 +19,6 @@ class Header extends Component {
         cardComponents: [],
         recievedData: [],
         renderList: false,
-        // textarea: '',
         cardClickId: '',
         currentComments: [],
         profileImageUrl: ""
@@ -60,7 +49,7 @@ class Header extends Component {
     cardClick = (id, category) => {
         
         // TODO: Refactor this to use the 'getListData' axios call in API - redundant routes on the backend
-        Axios.post(`http://localhost:8080/list/${id}/${category}`).then(data => {
+        Axios.post(`https://artwave-api.herokuapp.com/list/${id}/${category}`).then(data => {
             console.log(data)
             this.setState({
                 recievedData: data.data,

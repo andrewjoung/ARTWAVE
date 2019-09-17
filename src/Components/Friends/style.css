@@ -60,7 +60,3 @@ header {
     width: 100%;
     text-align: center;
 }
-
-#findFriendBtn:hover ~ .fa-sad-tear {
-    display: none;
-}

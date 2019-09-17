@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/ARTWAVE/static/css/main.812771df.chunk.css",
-    "main.js": "/ARTWAVE/static/js/main.8b520cba.chunk.js",
-    "main.js.map": "/ARTWAVE/static/js/main.8b520cba.chunk.js.map",
+    "main.css": "/ARTWAVE/static/css/main.cc98dad4.chunk.css",
+    "main.js": "/ARTWAVE/static/js/main.02f0e3d1.chunk.js",
+    "main.js.map": "/ARTWAVE/static/js/main.02f0e3d1.chunk.js.map",
     "runtime~main.js": "/ARTWAVE/static/js/runtime~main.0d8625f4.js",
     "runtime~main.js.map": "/ARTWAVE/static/js/runtime~main.0d8625f4.js.map",
-    "static/js/2.124e4c50.chunk.js": "/ARTWAVE/static/js/2.124e4c50.chunk.js",
-    "static/js/2.124e4c50.chunk.js.map": "/ARTWAVE/static/js/2.124e4c50.chunk.js.map",
+    "static/js/2.e561013e.chunk.js": "/ARTWAVE/static/js/2.e561013e.chunk.js",
+    "static/js/2.e561013e.chunk.js.map": "/ARTWAVE/static/js/2.e561013e.chunk.js.map",
     "index.html": "/ARTWAVE/index.html",
-    "precache-manifest.fb3427a50859842ab77530779d154fd7.js": "/ARTWAVE/precache-manifest.fb3427a50859842ab77530779d154fd7.js",
+    "precache-manifest.b93522a26ed03ab22b31e610a8fb77a8.js": "/ARTWAVE/precache-manifest.b93522a26ed03ab22b31e610a8fb77a8.js",
     "service-worker.js": "/ARTWAVE/service-worker.js",
-    "static/css/main.812771df.chunk.css.map": "/ARTWAVE/static/css/main.812771df.chunk.css.map",
+    "static/css/main.cc98dad4.chunk.css.map": "/ARTWAVE/static/css/main.cc98dad4.chunk.css.map",
     "static/media/style.css": "/ARTWAVE/static/media/texture9.9db85107.jpg"
   }
 }

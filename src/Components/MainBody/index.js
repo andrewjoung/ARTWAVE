@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import "./style.css";
-import ListCard from '../ListCard';
-import { Link,Redirect } from "react-router-dom";
-import api from '../../API/api';
-import { tsPropertySignature } from '@babel/types';
-import AllLists from '../AllLists'
+// import ListCard from '../ListCard';
+import { Link } from "react-router-dom";
+// import api from '../../API/api';
+// import { tsPropertySignature } from '@babel/types';
+// import AllLists from '../AllLists'
 
 const style={
     display:'none'
 }
 
+// TODO: Convert to stateful component
 function MainBody(props) {
 
     let category = "";
@@ -25,11 +26,11 @@ function MainBody(props) {
         // console.log("filter " + category);
     }
 
-    let listSearchObject = {
-        category: props.page,
-        username: props.loginInfo.username
-    }
-    let card;
+    // let listSearchObject = {
+    //     category: props.page,
+    //     username: props.loginInfo.username
+    // }
+    // let card;
 
     // console.log("function shit", category);
     // console.log(props);

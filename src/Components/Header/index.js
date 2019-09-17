@@ -1,21 +1,16 @@
 import React, { Component } from "react";
-import "./style.css";
+import { Link, Redirect } from "react-router-dom";
+
+import api from '../../API/api';
+import Axios from "axios";
+
+// Components
 import MainBody from "../MainBody";
 import ListCard from "../ListCard";
-import api from '../../API/api';
-import { Link, Redirect } from "react-router-dom";
-import Axios from "axios";
 import Recommended from "../Recommended";
-// import ListDisplay from '../ListDisplay'
-// import List from "../List";
 
-const style = {
-    color: 'white'
-}
-
-const style2 = {
-    width: '100%'
-}
+// CSS
+import "./style.css";
 
 class Header extends Component {
     state = {
@@ -24,7 +19,6 @@ class Header extends Component {
         cardComponents: [],
         recievedData: [],
         renderList: false,
-        // textarea: '',
         cardClickId: '',
         currentComments: [],
         profileImageUrl: ""
@@ -38,7 +32,7 @@ class Header extends Component {
 
         });
         this.apiCall();
-        console.log(JSON.parse(localStorage.getItem('loginInfo')))
+        // console.log(JSON.parse(localStorage.getItem('loginInfo')))
         
     }
 
@@ -70,7 +64,7 @@ class Header extends Component {
     
     //
     apiCall = () => {
-        console.log("in api call this is state that is passed in", this.state);
+        // console.log("in api call this is state that is passed in", this.state);
         
         let listSearchObject = {
             category: this.state.page,
@@ -104,7 +98,7 @@ class Header extends Component {
                         console.log(list.category);
                         count++;
                         let id = "listCard" + count;
-                        return <ListCard id={id} onClick={this.cardClick} category={list.category} listId={list._id} listItem={list} />;
+                        return <ListCard key={id} id={id} onClick={this.cardClick} category={list.category} listId={list._id} listItem={list} />;
                         
                     });
                     this.setState({ cardComponents: card });
@@ -196,38 +190,46 @@ class Header extends Component {
         return (
             <div>
                 <div id="userInformation" className="row">
+                    {/* <div className="col-md-6"> */}
+                        <div
+                            className="userAvatar"
+                            onClick={() => this.changeProfilePicture(photoUpload)}
+                            style={{backgroundImage: "url(" + this.state.loginInfo.profileImageUrl + ")"}}
+                        >
+                            <i id="addPhoto" title="Add Profile Photo" className="fas fa-plus" onClick={() => this.uploadProfilePhoto(photoUpload)} style={{display: displayAddPhoto}}></i>
+                        </div>
 
+                        <div className="userName">
+                            <h3 id="hello">Hello, </h3>
+                            <h1 id="name">{this.state.loginInfo.firstName}</h1>
+                        </div>
+                    {/* </div> */}
 
-                    <div
-                        className="userAvatar"
-                        onClick={() => this.changeProfilePicture(photoUpload)}
-                        style={{backgroundImage: "url(" + this.state.loginInfo.profileImageUrl + ")"}}
-                    >
-                        <i id="addPhoto" title="Add Profile Photo" class="fas fa-plus" onClick={() => this.uploadProfilePhoto(photoUpload)} style={{display: displayAddPhoto}}></i>
-                    </div>
+                    {/* <div className="col-md-3">
+                    </div> */}
 
-
-                    <div className="col userName">
-                        <h3 id="hello">Hello, </h3>
-                        <h1 id="name">{this.state.loginInfo.firstName}</h1>
-                    </div>
-                    <Link to="/findFriends">
-                        <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>Find Friends</button>
-                    </Link>
-                    <Link to="/friends">
-                        <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>View Friends</button>
-                    </Link>
+                    {/* <div className="col-md-6"></div> */}
                 </div>
+
+                    <div id="friendButtons">
+                        <Link to="/findFriends">
+                            <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>Find Friends</button>
+                        </Link>
+                        <Link to="/friends">
+                            <button className="btn btn-md" style={{ backgroundColor: "#B33434" }}>View Friends</button>
+                        </Link>
+                    </div>
+
 
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item" onClick={this.handleClick}>
-                        <a className="nav-link active" id="cinema-tab" data-toggle="tab" name="cinema" role="tab">Cinema</a>
+                        <button className="nav-link active" id="cinema-tab" data-toggle="tab" name="cinema" role="tab">Cinema</button>
                     </li>
                     <li className="nav-item" onClick={this.handleClick}>
-                        <a className="nav-link" id="profile-tab" data-toggle="tab" name="literature" role="tab">Literature</a>
+                        <button className="nav-link" id="profile-tab" data-toggle="tab" name="literature" role="tab">Literature</button>
                     </li>
                     <li className="nav-item" onClick={this.handleClick}>
-                        <a className="nav-link" id="contact-tab" data-toggle="tab" name="music" role="tab">Music</a>
+                        <button className="nav-link" id="contact-tab" data-toggle="tab" name="music" role="tab">Music</button>
                     </li>
                     {/* <li className="nav-item" onClick={this.handleClick}>
                         <a className="nav-link" id="friend-tab" data-toggle="tab" name="friends" role="tab">Friends</a>

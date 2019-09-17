@@ -52,5 +52,8 @@ export default {
     },
     addUserPhoto: (photoData) => {
         return axios.put("https://artwave-api.herokuapp.com/updatePhoto", photoData);
+    },
+    getCommentData: (commentId) => {
+        return axios.get("https://artwave-api.herokuapp.com/commentData/" + commentId);
     }
 };

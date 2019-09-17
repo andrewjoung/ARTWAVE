@@ -12,9 +12,9 @@ class Recommended extends Component {
 
     //
     componentDidMount = () => {
-        console.log("Component mounting with userId: " + this.state.id + "\n");
+        // console.log("Component mounting with userId: " + this.state.id + "\n");
         API.populateRecommended(this.state.id).then(dbRes => {
-            console.log("Rec response:\n", dbRes);
+            // console.log("Rec response:\n", dbRes);
             this.setState({
                 recommendedData: dbRes.data.recommended
             });

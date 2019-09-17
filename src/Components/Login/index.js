@@ -8,7 +8,9 @@ class Login extends Component {
         username: "",
         password: "",
         loggedIn: false,
-        loginInfo: {}
+        loginInfo: {},
+        displayError: false,
+        error: ""
     };
 
     // componentDidMount = () => {
@@ -31,14 +33,21 @@ class Login extends Component {
             password: this.state.password
         }
         API.loginUser(loginAttempt).then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             localStorage.setItem("loginInfo", JSON.stringify(res.data));
             this.setState({
                 loggedIn: true,
+                displayError: false,
                 loginInfo: res.data
             });
-        }).catch(function(err) {
+        }).catch(err => {
             console.log(err.response);
+
+            this.setState({
+                displayError: true,
+                error: err.response.data[Object.keys(err.response.data)[0]]
+            });
+
         });
     };
     
@@ -48,6 +57,13 @@ class Login extends Component {
                 <div id="loginContainer">
                     <h1 id="logoName"><span id="art">ART</span><span id="wave">WAVE</span></h1>
                     <form className="text-center">
+
+                        {/* {this.state.errors.map((errorObj, index) => {
+                            return <p key={index} className={this.state.displayError ? "displayError" : "noDisplay"}>{errorObj[Object.keys(errorObj)[index]]}</p>
+                        })} */}
+
+                        <p className={this.state.displayError ? "displayError" : "noDisplay"}>{this.state.error}</p>
+
                         <div id="inputBox">
                             <input value={this.state.username} className="form-control my-5" name="username" placeholder="Username" onChange={this.handleInputChange}/>
                             <input value={this.state.password} className="form-control" name="password" type="password" placeholder="Password" onChange={this.handleInputChange}/>

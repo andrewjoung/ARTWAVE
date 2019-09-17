@@ -1,6 +1,8 @@
 .card {
     width: 15vw;
     height: 15vw;
+    min-width: 110px;
+    min-height: 110px;
     margin-right: 20px;
     margin-left: 20px;
     padding:0;
@@ -90,4 +92,11 @@
     background-image:url("../../images/texture12.jpg");
     background-size:cover;
     background-position:center;
+}
+
+@media only screen and (max-width: 675px) {
+    .card {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
